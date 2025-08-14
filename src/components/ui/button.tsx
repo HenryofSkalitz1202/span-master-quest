@@ -9,7 +9,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300",
+        hero: "bg-gradient-hero text-white hover:shadow-glow transition-all duration-300 transform hover:scale-105",
+        accent: "bg-gradient-accent text-accent-foreground hover:shadow-lg transition-all duration-300",
+        success: "bg-gradient-success text-success-foreground hover:shadow-lg transition-all duration-300",
+        challenge: "bg-card text-card-foreground border-2 border-primary/20 hover:border-primary hover:bg-gradient-primary hover:text-white transition-all duration-300",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
