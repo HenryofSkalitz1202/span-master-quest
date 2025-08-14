@@ -10,6 +10,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
   const navItems = [
     { id: "home", label: "Home", icon: Home },
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
+    { id: "training", label: "Training", icon: Brain },
     { id: "profile", label: "Profile", icon: User },
     { id: "settings", label: "Settings", icon: Settings }
   ];
