@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Brain, Home, BarChart3, Settings, User } from "lucide-react";
+import { Brain, Home, BarChart3, Settings, User, FileText, Bot } from "lucide-react";
+import LanguageSelector from "./LanguageSelector";
 
 interface NavigationProps {
   currentView: string;
@@ -8,11 +9,12 @@ interface NavigationProps {
 
 const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
   const navItems = [
-    { id: "home", label: "Home", icon: Home },
+    { id: "home", label: "Beranda", icon: Home },
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
-    { id: "training", label: "Training", icon: Brain },
-    { id: "profile", label: "Profile", icon: User },
-    { id: "settings", label: "Settings", icon: Settings }
+    { id: "training", label: "Latihan", icon: Brain },
+    { id: "materials", label: "Materi AI", icon: FileText },
+    { id: "assistant", label: "Asisten AI", icon: Bot },
+    { id: "profile", label: "Profil", icon: User }
   ];
 
   return (
@@ -21,8 +23,8 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <Brain className="w-8 h-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">SpanAI</span>
+            <img src="/src/assets/matea-logo.png" alt="Matea" className="w-8 h-8" />
+            <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">MateaApp</span>
           </div>
           
           {/* Navigation Items */}
@@ -39,6 +41,7 @@ const Navigation = ({ currentView, onViewChange }: NavigationProps) => {
                 <span>{item.label}</span>
               </Button>
             ))}
+            <LanguageSelector />
           </div>
           
           {/* Mobile Menu Button */}

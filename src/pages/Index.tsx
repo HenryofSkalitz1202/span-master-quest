@@ -3,6 +3,8 @@ import Hero from "@/components/Hero";
 import Dashboard from "@/components/Dashboard";
 import Navigation from "@/components/Navigation";
 import TrainingPage from "@/components/TrainingPage";
+import LearningMaterials from "./LearningMaterials";
+import AIAssistant from "./AIAssistant";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState("home");
@@ -15,6 +17,10 @@ const Index = () => {
         return <Dashboard />;
       case "training":
         return <TrainingPage />;
+      case "materials":
+        return <LearningMaterials />;
+      case "assistant":
+        return <AIAssistant />;
       case "profile":
         return (
           <div className="min-h-screen bg-background pt-20 p-6">
