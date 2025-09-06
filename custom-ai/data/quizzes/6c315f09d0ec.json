@@ -1,0 +1,136 @@
+{
+  "_id": "6c315f09d0ec",
+  "created_at": "2025-09-06T22:06:36Z",
+  "model": "gemini-2.5-pro",
+  "items": [
+    {
+      "pertanyaan": "Apa tujuan utama dari penelitian yang dijelaskan dalam paper ini?",
+      "opsi": [
+        "A. Mengembangkan algoritma klasifikasi multi-label baru untuk memprediksi nilai mata kuliah mahasiswa.",
+        "B. Membandingkan efisiensi komputasi antara model embedding Word2Vec dan GloVe pada dataset akademik.",
+        "C. Menganalisis capaian pembelajaran mahasiswa dengan mengelompokkan teks capaian ke dalam klaster kompetensi menggunakan soft clustering.",
+        "D. Membuat sistem rekomendasi kurikulum berdasarkan data kompetensi alumni."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Abstrak dan pendahuluan menyatakan bahwa tujuan utama penelitian adalah melakukan soft clustering pada teks capaian pembelajaran mahasiswa untuk dipetakan ke dalam klaster-klaster kompetensi.",
+      "id": "q1"
+    },
+    {
+      "pertanyaan": "Mengapa algoritma Weiszfeld digunakan dalam tahap persiapan data pada penelitian ini?",
+      "opsi": [
+        "A. Untuk melakukan embedding pada teks capaian pembelajaran.",
+        "B. Untuk menentukan jumlah klaster yang optimal sebelum menjalankan Fuzzy C-Means.",
+        "C. Untuk menghasilkan nilai representasi kompetensi per jurusan yang tahan terhadap data pencilan (outliers).",
+        "D. Untuk menerjemahkan teks capaian pembelajaran dari Bahasa Indonesia ke Bahasa Inggris."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada bagian Data Preparation, dijelaskan bahwa algoritma Weiszfeld dipilih karena kemampuannya menentukan nilai representasi dengan meminimalkan pengaruh data pencilan, yang tidak bisa dilakukan dengan baik oleh rata-rata biasa.",
+      "id": "q2"
+    },
+    {
+      "pertanyaan": "Berdasarkan Tabel III (Evaluation Result), kombinasi model manakah yang menunjukkan performa terbaik secara keseluruhan?",
+      "opsi": [
+        "A. FuzzyC-Means dengan embedding all-mpnet-base-v2",
+        "B. Gaussian Mixture Models dengan embedding all-mpnet-base-v2",
+        "C. Cosine Normalized dengan embedding all-miniLM-L6-v2",
+        "D. FuzzyC-Means dengan embedding all-miniLM-L6-v2"
+      ],
+      "jawaban": "A",
+      "penjelasan": "Tabel III menunjukkan bahwa variasi 'FuzzyC-Means-all-mpnet-base-v2' memiliki skor Macro F-1 (0.732), Micro F-1 (0.627), dan Weighted F-1 (0.693) yang tertinggi dibandingkan semua variasi lainnya.",
+      "id": "q3"
+    },
+    {
+      "pertanyaan": "Apa keunggulan utama penggunaan *sentence embedding* (seperti Sentence-BERT) dibandingkan *static word embedding* (seperti Word2Vec) yang disorot dalam paper ini?",
+      "opsi": [
+        "A. Sentence embedding menghasilkan vektor dengan dimensi yang selalu lebih rendah.",
+        "B. Sentence embedding mampu menangani polisemi (kata dengan banyak makna) dan lebih efisien untuk tugas pencocokan kalimat.",
+        "C. Static word embedding tidak dapat digunakan untuk teks dalam Bahasa Indonesia.",
+        "D. Sentence embedding tidak memerlukan proses pra-pelatihan (pre-training) yang ekstensif."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Paper ini menyebutkan bahwa pendekatan sebelumnya yang menggunakan static word embedding tidak memperhitungkan polisemi. Selain itu, disebutkan bahwa Sentence-BERT jauh lebih efisien secara komputasi untuk tugas pencocokan kalimat dibandingkan model berbasis word embedding.",
+      "id": "q4"
+    },
+    {
+      "pertanyaan": "Bagaimana cara peneliti melakukan evaluasi terhadap model-model yang dibangun, mengingat tidak tersedianya data *ground truth*?",
+      "opsi": [
+        "A. Dengan menggunakan metrik evaluasi internal clustering seperti Silhouette Score.",
+        "B. Dengan meminta dosen untuk memberikan label kompetensi pada data capaian pembelajaran (expertise judgment) dan membandingkan hasil model dengan label tersebut.",
+        "C. Dengan mengasumsikan bahwa model dengan waktu komputasi tercepat adalah yang terbaik.",
+        "D. Dengan membandingkan hasil clustering secara langsung dengan hasil dari penelitian sebelumnya yang menggunakan Word2Vec."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Pada bagian Evaluation, dijelaskan bahwa karena tidak adanya ground truth, evaluasi dilakukan dengan meminta 'expertise judgment' dari dosen untuk melabeli data, kemudian hasil model dikonversi menjadi masalah klasifikasi dan diukur dengan metrik F1-score.",
+      "id": "q5"
+    },
+    {
+      "pertanyaan": "Menurut analisis dalam paper, mengapa performa model Gaussian Mixture Models (GMM) cenderung lebih buruk dibandingkan model lainnya?",
+      "opsi": [
+        "A. GMM adalah model hard clustering, sehingga tidak cocok untuk masalah ini.",
+        "B. Jumlah dimensi input dari hasil sentence embedding terlalu besar, sehingga jumlah parameter yang harus diestimasi oleh GMM menjadi sangat banyak.",
+        "C. GMM tidak dapat menangani data dengan distribusi yang tidak seimbang (unbalanced).",
+        "D. Waktu yang dibutuhkan untuk melatih model GMM jauh lebih lama dibandingkan Fuzzy C-Means."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Di akhir bagian evaluasi pada halaman 5, disebutkan bahwa performa GMM yang buruk kemungkinan disebabkan oleh jumlah dimensi input yang terlalu besar, yang menyebabkan jumlah parameter yang harus diestimasi meningkat dan mempengaruhi hasil akhir model.",
+      "id": "q6"
+    },
+    {
+      "pertanyaan": "Dua dataset utama yang digunakan dalam penelitian ini adalah...",
+      "opsi": [
+        "A. Data nilai mata kuliah mahasiswa dan data lowongan pekerjaan.",
+        "B. Data kompetensi dari survei Tracer Study alumni ITB dan data teks capaian pembelajaran dari website akademik ITB.",
+        "C. Data publikasi ilmiah dosen dan data prestasi mahasiswa.",
+        "D. Data transkrip mahasiswa dan data hasil wawancara dengan pihak industri."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Pada bagian Data Understanding, disebutkan secara jelas bahwa penelitian ini menggunakan dua dataset: dataset kompetensi dari ITB Tracer Study dan dataset capaian pembelajaran mahasiswa dari website akademik ITB (SIX ITB).",
+      "id": "q7"
+    },
+    {
+      "pertanyaan": "Model sentence embedding `all-mpnet-base-v2` dan `all-MiniLM-L6-v2` dipilih untuk diuji. Apa alasan utama pemilihan kedua model ini?",
+      "opsi": [
+        "A. Keduanya adalah model yang paling baru dirilis pada saat penelitian.",
+        "B. `all-mpnet-base-v2` memiliki performa terbaik, sedangkan `all-MiniLM-L6-v2` memiliki ukuran model terkecil dan kecepatan terbaik.",
+        "C. Keduanya secara spesifik dilatih untuk domain teks akademik dalam Bahasa Indonesia.",
+        "D. Hanya kedua model tersebut yang kompatibel dengan algoritma Fuzzy C-Means."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Pada bagian Modelling, dijelaskan bahwa `all-mpnet-base-v2` dipilih karena menunjukkan performa terbaik, sementara `all-MiniLM-L6-v2` dipilih sebagai alternatif karena ukurannya yang kecil (80 MB) dan kecepatannya yang tinggi tanpa kehilangan performa terlalu jauh.",
+      "id": "q8"
+    },
+    {
+      "pertanyaan": "Berdasarkan hasil analisis pada Tabel IV untuk program studi Ilmu Komputer, mengapa skor capaian pembelajaran pada tahun 2012 jauh lebih rendah dibandingkan tahun lainnya?",
+      "opsi": [
+        "A. Terjadi perubahan kurikulum yang signifikan pada tahun 2012.",
+        "B. Kualitas data kompetensi pada tahun 2012 sangat buruk.",
+        "C. Jumlah responden survei pada tahun 2012 sangat sedikit (hanya 65 orang) dibandingkan tahun lainnya.",
+        "D. Algoritma clustering gagal melakukan konvergensi untuk data tahun 2012."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Di halaman 6, paper menjelaskan bahwa skor yang rendah pada tahun 2012 disebabkan oleh jumlah data responden yang hanya 65 orang, jauh lebih sedikit dibandingkan tahun lain seperti 2015 yang mencapai 123 responden.",
+      "id": "q9"
+    },
+    {
+      "pertanyaan": "Metodologi pengembangan proyek yang digunakan dalam penelitian ini adalah...",
+      "opsi": [
+        "A. Agile Scrum",
+        "B. Waterfall",
+        "C. CRISP-DM (Cross-Industry Standard Process for Data Mining)",
+        "D. KDD (Knowledge Discovery in Databases)"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada awal bagian III. METHODOLOGY, disebutkan secara eksplisit, 'In this study, we use Cross-Industry Standard Process for Data Mining or commonly called CRISP-DM.'",
+      "id": "q10"
+    }
+  ],
+  "meta": {
+    "source": "files",
+    "file_count": 1,
+    "difficulty": "mixed",
+    "n": 10,
+    "language": "id",
+    "include_explanation": true,
+    "topic_filter": null
+  }
+}

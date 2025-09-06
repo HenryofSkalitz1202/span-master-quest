@@ -1,0 +1,136 @@
+{
+  "_id": "662bcf5f7401",
+  "created_at": "2025-09-06T22:15:40Z",
+  "model": "gemini-2.5-pro",
+  "items": [
+    {
+      "pertanyaan": "Apa tujuan utama dari penelitian yang dijelaskan dalam paper ini?",
+      "opsi": [
+        "A. Mengembangkan algoritma klasifikasi multi-label baru untuk luaran mahasiswa.",
+        "B. Melakukan soft clustering pada teks luaran mahasiswa untuk memetakannya ke dalam klaster kompetensi.",
+        "C. Membandingkan kecepatan komputasi antara word embedding dan sentence embedding.",
+        "D. Mengumpulkan data kompetensi lulusan melalui tracer study yang dilakukan oleh ITB."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Abstrak dan bagian Pendahuluan secara eksplisit menyatakan bahwa tujuan utama penelitian adalah membangun model soft clustering berbasis sentence embedding untuk menganalisis pencapaian setiap luaran mahasiswa berdasarkan data kompetensi.",
+      "id": "q1"
+    },
+    {
+      "pertanyaan": "Mengapa penelitian ini menggunakan pendekatan *soft clustering* daripada *hard clustering*?",
+      "opsi": [
+        "A. Karena soft clustering secara komputasi lebih ringan daripada hard clustering.",
+        "B. Karena satu teks luaran mahasiswa dapat berhubungan dengan beberapa kompetensi sekaligus.",
+        "C. Karena data kompetensi yang digunakan tidak memiliki label ground truth.",
+        "D. Karena algoritma Gaussian Mixture Models yang digunakan hanya mendukung soft clustering."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Pada bagian akhir Pendahuluan, disebutkan bahwa masalah pemetaan ini cocok untuk model soft clustering karena satu luaran mahasiswa dapat berkaitan dengan beberapa kompetensi, misalnya luaran di bidang ilmu komputer dapat berkaitan dengan penerapan pengetahuan dan keterampilan TI.",
+      "id": "q2"
+    },
+    {
+      "pertanyaan": "Dalam tahap persiapan data, algoritma Weiszfeld digunakan untuk tujuan spesifik apa?",
+      "opsi": [
+        "A. Untuk membersihkan teks luaran mahasiswa dari kesalahan penulisan dan tanda baca.",
+        "B. Untuk menerjemahkan teks luaran mahasiswa yang masih dalam Bahasa Indonesia ke Bahasa Inggris.",
+        "C. Untuk menghasilkan nilai representasi skor kompetensi per jurusan dengan meminimalkan pengaruh data pencilan (outliers).",
+        "D. Untuk melakukan embedding pada nama-nama kompetensi sebelum dimasukkan ke model clustering."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada bagian Persiapan Data, dijelaskan bahwa algoritma Weiszfeld dipilih karena kemampuannya untuk menentukan nilai representasi dengan meminimalkan pengaruh data pencilan (outliers) dengan mencari titik optimal menggunakan bobot jarak.",
+      "id": "q3"
+    },
+    {
+      "pertanyaan": "Berdasarkan Tabel III (Evaluation Result), kombinasi model manakah yang menunjukkan performa terbaik secara keseluruhan?",
+      "opsi": [
+        "A. Cosine Normalized dengan model all-mpnet-base-v2.",
+        "B. Gaussian Mixture Models dengan model all-MiniLM-L6-v2.",
+        "C. Fuzzy C-Means dengan model all-mpnet-base-v2.",
+        "D. Fuzzy C-Means dengan model all-MiniLM-L6-v2."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Tabel III menunjukkan bahwa variasi 'FuzzyC-Means-all-mpnet-base-v2' memiliki skor Macro F-1 (0.732), Micro F-1 (0.627), dan Weighted F-1 (0.693) yang tertinggi dibandingkan semua variasi model lainnya.",
+      "id": "q4"
+    },
+    {
+      "pertanyaan": "Apa alasan utama penulis memilih Sentence-BERT sebagai teknik embedding dalam penelitian ini?",
+      "opsi": [
+        "A. Karena Sentence-BERT adalah satu-satunya model yang tersedia dalam repositori yang digunakan.",
+        "B. Karena Sentence-BERT dapat mengurangi beban komputasi secara signifikan untuk tugas pencocokan kalimat dibandingkan model berbasis word embedding.",
+        "C. Karena Sentence-BERT menghasilkan vektor dengan dimensi yang paling rendah sehingga mempercepat proses clustering.",
+        "D. Karena Sentence-BERT tidak memerlukan data latih yang besar untuk fine-tuning."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Pada bagian Pemodelan, disebutkan bahwa Sentence-BERT dapat mengurangi komputasi secara signifikan, mampu melakukan pencocokan 10.000 kalimat dalam kurang dari 5 detik, sedangkan model berbasis word embedding membutuhkan 65 jam.",
+      "id": "q5"
+    },
+    {
+      "pertanyaan": "Bagaimana cara peneliti melakukan evaluasi model clustering mengingat tidak tersedianya data *ground truth*?",
+      "opsi": [
+        "A. Hanya dengan menggunakan metrik evaluasi internal seperti Modified Partition Coefficient (MPC).",
+        "B. Dengan membandingkan hasil clustering dengan penelitian sebelumnya yang sudah ada.",
+        "C. Dengan meminta penilaian dari para ahli (dosen) untuk melabeli data, kemudian membandingkan hasil model dengan label tersebut.",
+        "D. Dengan melakukan survei langsung kepada alumni untuk memvalidasi hasil pengelompokan kompetensi."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada bagian Evaluasi, dijelaskan bahwa karena tidak tersedianya ground truth, diperlukan 'expertise judgment' di mana dosen diminta memberikan pendapat untuk memilih kompetensi yang relevan untuk setiap luaran mahasiswa. Hasil ini kemudian digunakan sebagai pembanding.",
+      "id": "q6"
+    },
+    {
+      "pertanyaan": "Menurut analisis dalam paper, mengapa model Gaussian Mixture Models (GMM) menunjukkan performa yang paling buruk?",
+      "opsi": [
+        "A. GMM tidak cocok untuk data teks karena mengasumsikan distribusi normal.",
+        "B. GMM memerlukan parameter yang lebih sedikit sehingga kurang fleksibel dalam membentuk klaster.",
+        "C. Jumlah dimensi data input (hasil embedding) terlalu besar, sehingga jumlah parameter yang harus diestimasi oleh GMM menjadi sangat banyak dan hasilnya kurang baik.",
+        "D. Algoritma Expectation-Maximization (EM) pada GMM gagal mencapai konvergensi pada data yang digunakan."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Di akhir bagian Hasil Evaluasi, disebutkan bahwa performa GMM yang buruk disebabkan karena jumlah dimensi input untuk setiap data terlalu besar, sehingga jumlah parameter yang harus diestimasi meningkat dan mempengaruhi hasil akhir model.",
+      "id": "q7"
+    },
+    {
+      "pertanyaan": "Dari mana sumber data utama yang digunakan untuk (1) teks luaran mahasiswa dan (2) data kompetensi dalam penelitian ini?",
+      "opsi": [
+        "A. (1) Silabus mata kuliah, (2) Standar kompetensi industri.",
+        "B. (1) Website akademik ITB (SIX ITB), (2) Survei alumni oleh ITB Tracer Study.",
+        "C. Keduanya berasal dari survei alumni yang dilakukan oleh ITB Career Center.",
+        "D. Keduanya berasal dari website akademik ITB (SIX ITB)."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Bagian 'Data Understanding' menjelaskan bahwa penelitian ini menggunakan dua dataset: dataset kompetensi yang diperoleh dari tim ITB Tracer Study (hasil survei alumni) dan dataset luaran mahasiswa yang diperoleh dari website akademik ITB atau SIX ITB.",
+      "id": "q8"
+    },
+    {
+      "pertanyaan": "Manakah di antara berikut ini yang merupakan contoh dari teknik *static word embedding* yang disebutkan dalam paper sebagai pembanding dari teknik yang lebih modern?",
+      "opsi": [
+        "A. BERT",
+        "B. Sentence-BERT",
+        "C. Word2Vec",
+        "D. MPNet"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada bagian 'Related Works', paper menyebutkan bahwa 'Static word embedding, such as GloVe [10] and Word2Vec [10]' merupakan teknik embedding yang populer hingga akhir 2017 dan memiliki keterbatasan dalam menangani polisemi.",
+      "id": "q9"
+    },
+    {
+      "pertanyaan": "Dalam analisis hasil untuk Program Studi Ilmu Komputer (Tabel IV), mengapa skor rata-rata untuk tahun 2012 secara signifikan lebih rendah dibandingkan tahun-tahun lainnya?",
+      "opsi": [
+        "A. Karena kurikulum pada tahun 2012 menghasilkan lulusan dengan kompetensi yang lebih rendah.",
+        "B. Karena terjadi kesalahan dalam perhitungan menggunakan algoritma Weiszfeld khusus untuk data tahun 2012.",
+        "C. Karena jumlah responden survei pada tahun 2012 jauh lebih sedikit (hanya 65 orang) dibandingkan tahun-tahun lainnya.",
+        "D. Karena model embedding yang digunakan kurang cocok untuk menangkap konteks data dari tahun 2012."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada halaman 6, dijelaskan bahwa skor yang rendah pada tahun 2012 disebabkan karena jumlah data pada tahun tersebut hanya berjumlah 65 responden, sedangkan pada tahun-tahun lain jumlahnya jauh di atas itu.",
+      "id": "q10"
+    }
+  ],
+  "meta": {
+    "source": "files",
+    "file_count": 1,
+    "difficulty": "mixed",
+    "n": 10,
+    "language": "id",
+    "include_explanation": true,
+    "topic_filter": null
+  }
+}
