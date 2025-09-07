@@ -1,0 +1,272 @@
+{
+  "type": "memory",
+  "difficulty": "medium",
+  "count": 5,
+  "adaptive": true,
+  "seed": 564173017,
+  "locale": "id-ID",
+  "timeBudgetSec": 600,
+  "items": [
+    {
+      "itemId": "mem_lx_1",
+      "variant": "lexicon_match",
+      "prompt": "Ingat pasangan istilah Minang berikut, lalu pasangkan definisinya.",
+      "render": {
+        "kind": "match",
+        "pairs": [
+          {
+            "term": "pai",
+            "definition": "pergi",
+            "region": "Minang"
+          },
+          {
+            "term": "indak",
+            "definition": "tidak",
+            "region": "Minang"
+          },
+          {
+            "term": "bapikir",
+            "definition": "berpikir",
+            "region": "Minang"
+          },
+          {
+            "term": "tibo",
+            "definition": "jatuh",
+            "region": "Minang"
+          }
+        ],
+        "distractors": [
+          "berjalan",
+          "terima kasih"
+        ],
+        "displayMs": 12000,
+        "revealMode": "sequential"
+      },
+      "answerSpec": {
+        "mode": "mapping",
+        "leftKeys": [
+          "pai",
+          "indak",
+          "bapikir",
+          "tibo"
+        ],
+        "rightOptions": [
+          "pergi",
+          "tidak",
+          "berpikir",
+          "jatuh",
+          "berjalan",
+          "terima kasih"
+        ]
+      },
+      "solution": {
+        "pai": "pergi",
+        "indak": "tidak",
+        "bapikir": "berpikir",
+        "tibo": "jatuh"
+      },
+      "metadata": {
+        "region": "Minang",
+        "pairsCount": 4
+      }
+    },
+    {
+      "itemId": "mem_lx_2",
+      "variant": "lexicon_match",
+      "prompt": "Ingat pasangan istilah Bugis berikut, lalu pasangkan definisinya.",
+      "render": {
+        "kind": "match",
+        "pairs": [
+          {
+            "term": "iyye",
+            "definition": "iya",
+            "region": "Bugis"
+          },
+          {
+            "term": "de’na",
+            "definition": "tidak",
+            "region": "Bugis"
+          },
+          {
+            "term": "mammio",
+            "definition": "belajar",
+            "region": "Bugis"
+          },
+          {
+            "term": "accera",
+            "definition": "membaca",
+            "region": "Bugis"
+          }
+        ],
+        "distractors": [
+          "berjalan",
+          "terima kasih"
+        ],
+        "displayMs": 12000,
+        "revealMode": "sequential"
+      },
+      "answerSpec": {
+        "mode": "mapping",
+        "leftKeys": [
+          "iyye",
+          "de’na",
+          "mammio",
+          "accera"
+        ],
+        "rightOptions": [
+          "iya",
+          "tidak",
+          "belajar",
+          "membaca",
+          "berjalan",
+          "terima kasih"
+        ]
+      },
+      "solution": {
+        "iyye": "iya",
+        "de’na": "tidak",
+        "mammio": "belajar",
+        "accera": "membaca"
+      },
+      "metadata": {
+        "region": "Bugis",
+        "pairsCount": 4
+      }
+    },
+    {
+      "itemId": "mem_seq_3",
+      "variant": "sequence_missing",
+      "prompt": "Tonton urutan lalu isi bagian yang hilang.",
+      "render": {
+        "kind": "sequence",
+        "sequence": [
+          1,
+          6,
+          0,
+          4,
+          4,
+          6,
+          5
+        ],
+        "displayMs": 500,
+        "gapMs": 200,
+        "maskIndices": [
+          5,
+          6
+        ]
+      },
+      "answerSpec": {
+        "mode": "sequence_fill",
+        "dataType": "number[]"
+      },
+      "solution": [
+        6,
+        5
+      ],
+      "metadata": {
+        "length": 7,
+        "masked": 2
+      }
+    },
+    {
+      "itemId": "mem_seq_4",
+      "variant": "sequence_missing",
+      "prompt": "Tonton urutan lalu isi bagian yang hilang.",
+      "render": {
+        "kind": "sequence",
+        "sequence": [
+          9,
+          8,
+          4,
+          2,
+          1,
+          5,
+          1
+        ],
+        "displayMs": 500,
+        "gapMs": 200,
+        "maskIndices": [
+          5,
+          6
+        ]
+      },
+      "answerSpec": {
+        "mode": "sequence_fill",
+        "dataType": "number[]"
+      },
+      "solution": [
+        5,
+        1
+      ],
+      "metadata": {
+        "length": 7,
+        "masked": 2
+      }
+    },
+    {
+      "itemId": "mem_sc_5",
+      "variant": "scene_recall",
+      "prompt": "Satu objek pada scene berubah. Pilih perubahan yang benar.",
+      "render": {
+        "kind": "scene",
+        "grid": 4,
+        "objects": [
+          {
+            "id": "obj1",
+            "pos": [
+              2,
+              0
+            ],
+            "icon": "bench",
+            "color": "#F59E0B"
+          },
+          {
+            "id": "obj2",
+            "pos": [
+              3,
+              3
+            ],
+            "icon": "bench",
+            "color": "#8B5CF6"
+          },
+          {
+            "id": "obj3",
+            "pos": [
+              1,
+              1
+            ],
+            "icon": "tower",
+            "color": "#8B5CF6"
+          }
+        ],
+        "change": {
+          "type": "moved",
+          "targetId": "obj1",
+          "to": [
+            2,
+            2
+          ]
+        }
+      },
+      "answerSpec": {
+        "mode": "single_choice",
+        "options": [
+          "obj1@2-0",
+          "obj2@3-3",
+          "obj3@1-1",
+          "obj1@2-2"
+        ]
+      },
+      "solution": "obj1@2-2",
+      "metadata": {
+        "grid": 4,
+        "objects": 3,
+        "change": "moved"
+      }
+    }
+  ],
+  "model": "gemini-2.5-pro",
+  "llm_used": true,
+  "_id": "9e54019cebd3",
+  "created_at": "2025-09-07T00:43:25Z"
+}

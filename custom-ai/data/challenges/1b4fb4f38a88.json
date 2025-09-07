@@ -1,0 +1,272 @@
+{
+  "type": "memory",
+  "difficulty": "medium",
+  "count": 5,
+  "adaptive": true,
+  "seed": 564176887,
+  "locale": "id-ID",
+  "timeBudgetSec": 600,
+  "items": [
+    {
+      "itemId": "mem_lx_1",
+      "variant": "lexicon_match",
+      "prompt": "Ingat pasangan istilah Minang berikut, lalu pasangkan definisinya.",
+      "render": {
+        "kind": "match",
+        "pairs": [
+          {
+            "term": "makan",
+            "definition": "makan",
+            "region": "Minang"
+          },
+          {
+            "term": "tibo",
+            "definition": "jatuh",
+            "region": "Minang"
+          },
+          {
+            "term": "indak",
+            "definition": "tidak",
+            "region": "Minang"
+          },
+          {
+            "term": "bapikir",
+            "definition": "berpikir",
+            "region": "Minang"
+          }
+        ],
+        "distractors": [
+          "berjalan",
+          "terima kasih"
+        ],
+        "displayMs": 12000,
+        "revealMode": "sequential"
+      },
+      "answerSpec": {
+        "mode": "mapping",
+        "leftKeys": [
+          "makan",
+          "tibo",
+          "indak",
+          "bapikir"
+        ],
+        "rightOptions": [
+          "makan",
+          "jatuh",
+          "tidak",
+          "berpikir",
+          "berjalan",
+          "terima kasih"
+        ]
+      },
+      "solution": {
+        "makan": "makan",
+        "tibo": "jatuh",
+        "indak": "tidak",
+        "bapikir": "berpikir"
+      },
+      "metadata": {
+        "region": "Minang",
+        "pairsCount": 4
+      }
+    },
+    {
+      "itemId": "mem_lx_2",
+      "variant": "lexicon_match",
+      "prompt": "Ingat pasangan istilah Batak berikut, lalu pasangkan definisinya.",
+      "render": {
+        "kind": "match",
+        "pairs": [
+          {
+            "term": "marsak",
+            "definition": "susah",
+            "region": "Batak"
+          },
+          {
+            "term": "mauliate",
+            "definition": "terima kasih",
+            "region": "Batak"
+          },
+          {
+            "term": "adong",
+            "definition": "ada",
+            "region": "Batak"
+          },
+          {
+            "term": "mangan",
+            "definition": "makan",
+            "region": "Batak"
+          }
+        ],
+        "distractors": [
+          "berjalan",
+          "permisi"
+        ],
+        "displayMs": 12000,
+        "revealMode": "sequential"
+      },
+      "answerSpec": {
+        "mode": "mapping",
+        "leftKeys": [
+          "marsak",
+          "mauliate",
+          "adong",
+          "mangan"
+        ],
+        "rightOptions": [
+          "susah",
+          "terima kasih",
+          "ada",
+          "makan",
+          "berjalan",
+          "permisi"
+        ]
+      },
+      "solution": {
+        "marsak": "susah",
+        "mauliate": "terima kasih",
+        "adong": "ada",
+        "mangan": "makan"
+      },
+      "metadata": {
+        "region": "Batak",
+        "pairsCount": 4
+      }
+    },
+    {
+      "itemId": "mem_seq_3",
+      "variant": "sequence_missing",
+      "prompt": "Tonton urutan lalu isi bagian yang hilang.",
+      "render": {
+        "kind": "sequence",
+        "sequence": [
+          7,
+          1,
+          5,
+          9,
+          5,
+          8,
+          4
+        ],
+        "displayMs": 500,
+        "gapMs": 200,
+        "maskIndices": [
+          4,
+          5
+        ]
+      },
+      "answerSpec": {
+        "mode": "sequence_fill",
+        "dataType": "number[]"
+      },
+      "solution": [
+        5,
+        8
+      ],
+      "metadata": {
+        "length": 7,
+        "masked": 2
+      }
+    },
+    {
+      "itemId": "mem_seq_4",
+      "variant": "sequence_missing",
+      "prompt": "Tonton urutan lalu isi bagian yang hilang.",
+      "render": {
+        "kind": "sequence",
+        "sequence": [
+          7,
+          1,
+          5,
+          1,
+          8,
+          9,
+          0
+        ],
+        "displayMs": 500,
+        "gapMs": 200,
+        "maskIndices": [
+          2,
+          5
+        ]
+      },
+      "answerSpec": {
+        "mode": "sequence_fill",
+        "dataType": "number[]"
+      },
+      "solution": [
+        5,
+        9
+      ],
+      "metadata": {
+        "length": 7,
+        "masked": 2
+      }
+    },
+    {
+      "itemId": "mem_sc_5",
+      "variant": "scene_recall",
+      "prompt": "Satu objek pada scene berubah. Pilih perubahan yang benar.",
+      "render": {
+        "kind": "scene",
+        "grid": 4,
+        "objects": [
+          {
+            "id": "obj1",
+            "pos": [
+              1,
+              3
+            ],
+            "icon": "car",
+            "color": "#10B981"
+          },
+          {
+            "id": "obj2",
+            "pos": [
+              0,
+              2
+            ],
+            "icon": "tree",
+            "color": "#3B82F6"
+          },
+          {
+            "id": "obj3",
+            "pos": [
+              2,
+              1
+            ],
+            "icon": "bench",
+            "color": "#10B981"
+          }
+        ],
+        "change": {
+          "type": "moved",
+          "targetId": "obj2",
+          "to": [
+            3,
+            1
+          ]
+        }
+      },
+      "answerSpec": {
+        "mode": "single_choice",
+        "options": [
+          "obj1@1-3",
+          "obj2@0-2",
+          "obj3@2-1",
+          "obj2@3-1"
+        ]
+      },
+      "solution": "obj2@3-1",
+      "metadata": {
+        "grid": 4,
+        "objects": 3,
+        "change": "moved"
+      }
+    }
+  ],
+  "model": "gemini-2.5-pro",
+  "llm_used": true,
+  "_id": "1b4fb4f38a88",
+  "created_at": "2025-09-07T00:43:31Z"
+}

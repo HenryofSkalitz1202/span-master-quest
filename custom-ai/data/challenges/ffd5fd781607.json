@@ -1,0 +1,228 @@
+{
+  "type": "numerical",
+  "difficulty": "medium",
+  "count": 5,
+  "adaptive": true,
+  "seed": 563976495,
+  "locale": "id-ID",
+  "timeBudgetSec": 600,
+  "items": [
+    {
+      "itemId": "num_24_1",
+      "variant": "target_24",
+      "prompt": "Susun ekspresi dari keempat angka agar bernilai 24.",
+      "render": {
+        "kind": "build-expression",
+        "numbers": [
+          3,
+          3,
+          8,
+          8
+        ],
+        "operators": [
+          "+",
+          "-",
+          "×",
+          "÷"
+        ],
+        "target": 24,
+        "slots": 7
+      },
+      "answerSpec": {
+        "mode": "expression",
+        "alphabet": [
+          "0-9",
+          "+",
+          "-",
+          "×",
+          "÷",
+          "(",
+          ")"
+        ]
+      },
+      "solution": {
+        "numbers": [
+          3,
+          3,
+          8,
+          8
+        ],
+        "target": 24,
+        "oneSolution": "(8 / (3 - 8/3))"
+      },
+      "metadata": {
+        "mustUseAllNumbers": true,
+        "allowParentheses": true,
+        "difficulty": "easy"
+      }
+    },
+    {
+      "itemId": "num_maze_2",
+      "variant": "number_maze",
+      "prompt": "Mulai dari nilai sel awal. Pilih jalur agar nilai akhir = 19.",
+      "render": {
+        "kind": "path-grid",
+        "grid": 3,
+        "cells": [
+          [
+            3,
+            6,
+            8
+          ],
+          [
+            6,
+            8,
+            4
+          ],
+          [
+            6,
+            7,
+            5
+          ]
+        ],
+        "edges": {
+          "h": [
+            [
+              "-",
+              "+"
+            ],
+            [
+              "×",
+              "×"
+            ],
+            [
+              "-",
+              "÷"
+            ]
+          ],
+          "v": [
+            [
+              "×",
+              "+",
+              "+"
+            ],
+            [
+              "×",
+              "-",
+              "÷"
+            ]
+          ]
+        },
+        "start": [
+          1,
+          2
+        ],
+        "target": 19,
+        "maxSteps": 4
+      },
+      "answerSpec": {
+        "mode": "path",
+        "encoding": "cells"
+      },
+      "solution": {
+        "pathCells": [
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "maxSteps": 4
+      }
+    },
+    {
+      "itemId": "num_eq_3",
+      "variant": "equation_fill",
+      "prompt": "Isi kotak agar persamaan benar.",
+      "render": {
+        "kind": "fill-blanks",
+        "expressionLeft": "□1 + 6□",
+        "expressionRight": "□21",
+        "blanks": 3,
+        "constraints": {
+          "distinct": false
+        }
+      },
+      "answerSpec": {
+        "mode": "digits",
+        "count": 3
+      },
+      "solution": [
+        "6",
+        "0",
+        "1"
+      ],
+      "metadata": {
+        "difficulty": "medium",
+        "original": {
+          "left": "61 + 60",
+          "right": "121"
+        }
+      }
+    },
+    {
+      "itemId": "num_fn_4",
+      "variant": "function_machine",
+      "prompt": "Diberikan f(x)=2x + 3 dan g(x)=x / 4. Hitung f(g(28)).",
+      "render": {
+        "kind": "text",
+        "functions": {
+          "f": "2x + 3",
+          "g": "x / 4"
+        },
+        "query": "f(g(28))"
+      },
+      "answerSpec": {
+        "mode": "free",
+        "dataType": "number"
+      },
+      "solution": 17.0,
+      "metadata": {
+        "steps": [
+          "g(28)=7.0",
+          "f(7.0)=17.0"
+        ],
+        "difficulty": "medium"
+      }
+    },
+    {
+      "itemId": "num_mod_5",
+      "variant": "modular_arith",
+      "prompt": "Hitung (66 × 30 + 8) mod 26.",
+      "render": {
+        "kind": "text"
+      },
+      "answerSpec": {
+        "mode": "free",
+        "dataType": "number"
+      },
+      "solution": 12,
+      "metadata": {
+        "difficulty": "hard",
+        "mod": 26
+      }
+    }
+  ],
+  "model": "gemini-2.5-pro",
+  "llm_used": true,
+  "_id": "ffd5fd781607",
+  "created_at": "2025-09-07T00:40:23Z"
+}

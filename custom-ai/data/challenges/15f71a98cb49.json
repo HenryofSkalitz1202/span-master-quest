@@ -1,0 +1,228 @@
+{
+  "type": "numerical",
+  "difficulty": "medium",
+  "count": 5,
+  "adaptive": true,
+  "seed": 563576756,
+  "locale": "id-ID",
+  "timeBudgetSec": 600,
+  "items": [
+    {
+      "itemId": "num_24_1",
+      "variant": "target_24",
+      "prompt": "Susun ekspresi dari keempat angka agar bernilai 24.",
+      "render": {
+        "kind": "build-expression",
+        "numbers": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "operators": [
+          "+",
+          "-",
+          "×",
+          "÷"
+        ],
+        "target": 24,
+        "slots": 7
+      },
+      "answerSpec": {
+        "mode": "expression",
+        "alphabet": [
+          "0-9",
+          "+",
+          "-",
+          "×",
+          "÷",
+          "(",
+          ")"
+        ]
+      },
+      "solution": {
+        "numbers": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "target": 24,
+        "oneSolution": null
+      },
+      "metadata": {
+        "mustUseAllNumbers": true,
+        "allowParentheses": true,
+        "difficulty": "easy"
+      }
+    },
+    {
+      "itemId": "num_maze_2",
+      "variant": "number_maze",
+      "prompt": "Mulai dari nilai sel awal. Pilih jalur agar nilai akhir = -5.",
+      "render": {
+        "kind": "path-grid",
+        "grid": 3,
+        "cells": [
+          [
+            6,
+            3,
+            9
+          ],
+          [
+            7,
+            1,
+            9
+          ],
+          [
+            7,
+            1,
+            6
+          ]
+        ],
+        "edges": {
+          "h": [
+            [
+              "×",
+              "×"
+            ],
+            [
+              "+",
+              "×"
+            ],
+            [
+              "×",
+              "÷"
+            ]
+          ],
+          "v": [
+            [
+              "-",
+              "×",
+              "+"
+            ],
+            [
+              "-",
+              "+",
+              "+"
+            ]
+          ]
+        },
+        "start": [
+          1,
+          0
+        ],
+        "target": -5,
+        "maxSteps": 4
+      },
+      "answerSpec": {
+        "mode": "path",
+        "encoding": "cells"
+      },
+      "solution": {
+        "pathCells": [
+          [
+            1,
+            0
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            1
+          ]
+        ]
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "maxSteps": 4
+      }
+    },
+    {
+      "itemId": "num_eq_3",
+      "variant": "equation_fill",
+      "prompt": "Isi kotak agar persamaan benar.",
+      "render": {
+        "kind": "fill-blanks",
+        "expressionLeft": "□7 + 2□",
+        "expressionRight": "□0",
+        "blanks": 3,
+        "constraints": {
+          "distinct": false
+        }
+      },
+      "answerSpec": {
+        "mode": "digits",
+        "count": 3
+      },
+      "solution": [
+        "5",
+        "3",
+        "8"
+      ],
+      "metadata": {
+        "difficulty": "medium",
+        "original": {
+          "left": "57 + 23",
+          "right": "80"
+        }
+      }
+    },
+    {
+      "itemId": "num_fn_4",
+      "variant": "function_machine",
+      "prompt": "Diberikan f(x)=4x + 5 dan g(x)=x / 5. Hitung f(g(18)).",
+      "render": {
+        "kind": "text",
+        "functions": {
+          "f": "4x + 5",
+          "g": "x / 5"
+        },
+        "query": "f(g(18))"
+      },
+      "answerSpec": {
+        "mode": "free",
+        "dataType": "number"
+      },
+      "solution": 19.4,
+      "metadata": {
+        "steps": [
+          "g(18)=3.6",
+          "f(3.6)=19.4"
+        ],
+        "difficulty": "medium"
+      }
+    },
+    {
+      "itemId": "num_mod_5",
+      "variant": "modular_arith",
+      "prompt": "Hitung (90 × 46 + 14) mod 31.",
+      "render": {
+        "kind": "text"
+      },
+      "answerSpec": {
+        "mode": "free",
+        "dataType": "number"
+      },
+      "solution": 0,
+      "metadata": {
+        "difficulty": "hard",
+        "mod": 31
+      }
+    }
+  ],
+  "model": "gemini-2.5-pro",
+  "llm_used": true,
+  "_id": "15f71a98cb49",
+  "created_at": "2025-09-07T00:34:01Z"
+}

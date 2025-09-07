@@ -1,264 +1,322 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createChallenge, ChallengeItem } from "@/lib/api";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Brain, Timer, Award, RotateCcw } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
-interface MemoryChallengeProps {
-  onComplete: (score: number, success: boolean) => void;
-  onBack: () => void;
-}
+type Props = { onComplete: (score: number) => void; onBack: () => void };
+type Mapping = Record<string, string>;
 
-const MemoryChallenge = ({ onComplete, onBack }: MemoryChallengeProps) => {
-  const [gameState, setGameState] = useState<"waiting" | "playing" | "completed">("waiting");
-  const [currentLevel, setCurrentLevel] = useState(1);
-  const [timeLeft, setTimeLeft] = useState(30);
-  const [score, setScore] = useState(0);
-  const [sequence, setSequence] = useState<number[]>([]);
-  const [userSequence, setUserSequence] = useState<number[]>([]);
-  const [showingSequence, setShowingSequence] = useState(false);
-  const [currentSequenceIndex, setCurrentSequenceIndex] = useState(0);
-
-  const generateSequence = (length: number) => {
-    const newSequence = [];
-    for (let i = 0; i < length; i++) {
-      newSequence.push(Math.floor(Math.random() * 9) + 1);
-    }
-    return newSequence;
-  };
-
-  const startChallenge = () => {
-    const sequenceLength = 3 + currentLevel;
-    const newSequence = generateSequence(sequenceLength);
-    setSequence(newSequence);
-    setUserSequence([]);
-    setGameState("playing");
-    setShowingSequence(true);
-    setCurrentSequenceIndex(0);
-    setTimeLeft(30);
-  };
-
-  const handleNumberClick = (number: number) => {
-    if (showingSequence || gameState !== "playing") return;
-    
-    const newUserSequence = [...userSequence, number];
-    setUserSequence(newUserSequence);
-
-    if (newUserSequence.length === sequence.length) {
-      const isCorrect = newUserSequence.every((num, index) => num === sequence[index]);
-      if (isCorrect) {
-        const newScore = score + 10 * currentLevel;
-        setScore(newScore);
-        setCurrentLevel(currentLevel + 1);
-        setGameState("completed");
-        onComplete(newScore, true);
-      } else {
-        setGameState("completed");
-        onComplete(score, false);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (showingSequence && currentSequenceIndex < sequence.length) {
-      const timer = setTimeout(() => {
-        setCurrentSequenceIndex(currentSequenceIndex + 1);
-      }, 800);
-      return () => clearTimeout(timer);
-    } else if (showingSequence && currentSequenceIndex >= sequence.length) {
-      setTimeout(() => {
-        setShowingSequence(false);
-      }, 500);
-    }
-  }, [showingSequence, currentSequenceIndex, sequence.length]);
-
-  useEffect(() => {
-    if (gameState === "playing" && !showingSequence && timeLeft > 0) {
-      const timer = setTimeout(() => {
-        setTimeLeft(timeLeft - 1);
-      }, 1000);
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && gameState === "playing") {
-      setGameState("completed");
-      onComplete(score, false);
-    }
-  }, [gameState, showingSequence, timeLeft]);
-
-  const resetChallenge = () => {
-    setGameState("waiting");
-    setCurrentLevel(1);
-    setScore(0);
-    setSequence([]);
-    setUserSequence([]);
-    setShowingSequence(false);
-    setCurrentSequenceIndex(0);
-  };
-
-  const renderNumberGrid = () => {
-    return (
-      <div className="grid grid-cols-3 gap-4 max-w-xs mx-auto">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => (
-          <Button
-            key={number}
-            variant={
-              showingSequence && sequence[currentSequenceIndex - 1] === number
-                ? "default"
-                : userSequence.includes(number)
-                ? "secondary"
-                : "outline"
-            }
-            size="lg"
-            className={`h-16 w-16 text-xl font-bold transition-all duration-200 ${
-              showingSequence && sequence[currentSequenceIndex - 1] === number
-                ? "bg-gradient-primary text-primary-foreground shadow-glow scale-110"
-                : ""
-            }`}
-            onClick={() => handleNumberClick(number)}
-            disabled={showingSequence}
-          >
-            {number}
-          </Button>
-        ))}
-      </div>
-    );
-  };
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <Button variant="ghost" onClick={onBack}>
-          ← Kembali
-        </Button>
-        <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-          Tantangan Memori
-        </h2>
-        <div></div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Brain className="h-4 w-4 text-accent" />
-              Level
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{currentLevel}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Timer className="h-4 w-4 text-warning" />
-              Waktu Tersisa
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{timeLeft}d</div>
-            <Progress value={(timeLeft / 30) * 100} className="mt-2" />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Award className="h-4 w-4 text-success" />
-              Skor
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{score}</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-center">
-            {gameState === "waiting" && "Siap untuk memulai?"}
-            {gameState === "playing" && showingSequence && "Perhatikan urutan angka..."}
-            {gameState === "playing" && !showingSequence && "Ulangi urutan angka"}
-            {gameState === "completed" && "Tantangan Selesai!"}
-          </CardTitle>
-          {gameState === "playing" && (
-            <CardDescription className="text-center">
-              {showingSequence 
-                ? `Menampilkan ${currentSequenceIndex}/${sequence.length}` 
-                : `Masukkan ${userSequence.length}/${sequence.length} angka`
-              }
-            </CardDescription>
-          )}
-        </CardHeader>
-        <CardContent className="pt-6">
-          {gameState === "waiting" && (
-            <div className="text-center">
-              <p className="text-muted-foreground mb-6">
-                Anda akan melihat urutan angka. Ingat dan klik dengan urutan yang sama.
-              </p>
-              <Button 
-                onClick={startChallenge}
-                size="lg"
-                className="bg-gradient-primary hover:bg-gradient-primary/90"
-              >
-                Mulai Tantangan
-              </Button>
-            </div>
-          )}
-
-          {gameState === "playing" && renderNumberGrid()}
-
-          {gameState === "completed" && (
-            <div className="text-center space-y-4">
-              {userSequence.every((num, index) => num === sequence[index]) ? (
-                <div>
-                  <Badge variant="outline" className="mb-4 text-success border-success">
-                    Sempurna! +{10 * (currentLevel - 1)} poin
-                  </Badge>
-                  <p className="text-muted-foreground mb-6">
-                    Kerja bagus! Lanjut ke level {currentLevel}
-                  </p>
-                  <Button 
-                    onClick={startChallenge}
-                    size="lg"
-                    className="mr-4 bg-gradient-primary hover:bg-gradient-primary/90"
-                  >
-                    Level Selanjutnya
-                  </Button>
-                </div>
-              ) : (
-                <div>
-                  <Badge variant="outline" className="mb-4 text-destructive border-destructive">
-                    Coba Lagi
-                  </Badge>
-                  <p className="text-muted-foreground mb-6">
-                    Jangan khawatir, latihan membuat sempurna!
-                  </p>
-                  <Button 
-                    onClick={startChallenge}
-                    size="lg"
-                    className="mr-4 bg-gradient-primary hover:bg-gradient-primary/90"
-                  >
-                    Ulangi Level
-                  </Button>
-                </div>
-              )}
-              <Button 
-                onClick={resetChallenge}
-                variant="outline"
-                size="lg"
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Reset Game
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
+const ICONS: Record<string, string> = {
+  house: "🏠",
+  tree: "🌳",
+  car: "🚗",
+  shop: "🏬",
+  bench: "🪑",
+  lamp: "💡",
+  school: "🏫",
+  tower: "🗼",
+  boat: "⛵",
 };
 
-export default MemoryChallenge;
+const MEMORIZE_SEC = 20;
+const ANSWER_SEC = 10;
+
+const fmt = (s: number) =>
+  `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+
+export default function MemoryChallenge({ onComplete, onBack }: Props) {
+  const [items, setItems] = useState<ChallengeItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [ix, setIx] = useState(0);
+  const [score, setScore] = useState(0);
+
+  const [phase, setPhase] = useState<"memorize" | "answer">("memorize");
+
+  // timers
+  const [memLeft, setMemLeft] = useState(MEMORIZE_SEC);
+  const [ansLeft, setAnsLeft] = useState(ANSWER_SEC);
+  const memIntRef = useRef<number | null>(null);
+  const ansIntRef = useRef<number | null>(null);
+
+  // state jawaban
+  const [mapping, setMapping] = useState<Mapping>({});
+  const [seqInputs, setSeqInputs] = useState<number[]>([]);
+  const [selectedText, setSelectedText] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const doc = await createChallenge("memory", "medium", true);
+        setItems(doc.items || []);
+      } catch (e: any) {
+        toast.error(e?.message || "Gagal memuat tantangan");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  // mulai ulang fase & timer tiap pindah soal
+  useEffect(() => {
+    if (!items[ix]) return;
+
+    // reset input
+    setMapping({});
+    setSeqInputs([]);
+    setSelectedText(null);
+
+    // bersihkan interval lama
+    if (memIntRef.current) window.clearInterval(memIntRef.current);
+    if (ansIntRef.current) window.clearInterval(ansIntRef.current);
+
+    // set fase memorize 20s
+    setPhase("memorize");
+    setMemLeft(MEMORIZE_SEC);
+    setAnsLeft(ANSWER_SEC);
+
+    memIntRef.current = window.setInterval(() => {
+      setMemLeft((s) => {
+        if (s <= 1) {
+          // selesai memorize -> masuk fase jawab
+          if (memIntRef.current) window.clearInterval(memIntRef.current);
+          startAnswerTimer();
+          setPhase("answer");
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+
+    return () => {
+      if (memIntRef.current) window.clearInterval(memIntRef.current);
+      if (ansIntRef.current) window.clearInterval(ansIntRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ix, items]);
+
+  function startAnswerTimer() {
+    if (ansIntRef.current) window.clearInterval(ansIntRef.current);
+    setAnsLeft(ANSWER_SEC);
+    ansIntRef.current = window.setInterval(() => {
+      setAnsLeft((s) => {
+        if (s <= 1) {
+          if (ansIntRef.current) window.clearInterval(ansIntRef.current);
+          // auto-submit saat waktu habis
+          submit(true);
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+  }
+
+  const it = items[ix];
+
+  const lexiconChoices = useMemo(() => {
+    if (!it || it.variant !== "lexicon_match") return {};
+    const pairs: { term: string; definition: string }[] = it.render?.pairs || [];
+    const pool = [...pairs.map((p) => p.definition), ...(it.render?.distractors || [])];
+    const byTerm: Record<string, string[]> = {};
+    pairs.forEach((p) => {
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      byTerm[p.term] = shuffled;
+    });
+    return byTerm;
+  }, [it]);
+
+  function next() {
+    if (ix + 1 < items.length) setIx(ix + 1);
+    else onComplete(score);
+  }
+
+  function submit(auto = false) {
+    if (!it) return;
+
+    let ok = false;
+
+    if (it.variant === "lexicon_match") {
+      const pairs: { term: string; definition: string }[] = it.render?.pairs || [];
+      ok = pairs.length > 0 && pairs.every((p) => mapping[p.term] === p.definition);
+    }
+
+    if (it.variant === "sequence_missing") {
+      const seq: number[] = it.render?.sequence || [];
+      const mask: number[] = it.render?.maskIndices || [];
+      ok = mask.length > 0 && mask.every((m, j) => Number(seqInputs[j]) === Number(seq[m]));
+    }
+
+    if (it.variant === "scene_recall") {
+      const change = it.render?.change;
+      const expect =
+        change?.type === "removed"
+          ? change?.targetId
+          : change?.type === "moved"
+          ? `${change?.targetId}@${change?.to?.[0]}-${change?.to?.[1]}`
+          : null;
+      ok = !!expect && selectedText === expect;
+    }
+
+    // skor: hanya saat jawaban benar (auto-submit yang kosong = salah)
+    setScore((s) => s + (ok ? 1000 : 0));
+    next();
+  }
+
+  if (loading) return <div className="p-6">Memuat…</div>;
+  if (!items.length || !it) return <div className="p-6">Tidak ada soal.</div>;
+
+  return (
+    <div className="container max-w-3xl mx-auto py-6">
+      <div className="mb-4 flex items-center justify-between">
+        <Button variant="ghost" onClick={onBack}>← Kembali</Button>
+        <div className="text-sm text-muted-foreground">
+          Soal {ix + 1} / {items.length} • Skor: {score}
+        </div>
+      </div>
+
+      {/* timer header */}
+      <div className="mb-3 text-sm">
+        {phase === "memorize" ? (
+          <div className="inline-flex items-center gap-2 rounded-md border px-3 py-1">
+            <span className="font-medium">Waktu menghafal</span>
+            <span className="tabular-nums">{fmt(memLeft)}</span>
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-2 rounded-md border px-3 py-1">
+            <span className="font-medium">Waktu menjawab</span>
+            <span className="tabular-nums">{fmt(ansLeft)}</span>
+          </div>
+        )}
+      </div>
+
+      {/* 1) LEXICON MATCH */}
+      {it.variant === "lexicon_match" && (
+        <Card>
+          <CardHeader><CardTitle>{it.prompt}</CardTitle></CardHeader>
+          <CardContent>
+            {phase === "memorize" ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {(it.render?.pairs || []).map((p: any) => (
+                  <div key={p.term} className="p-3 border rounded-lg flex justify-between">
+                    <span className="font-medium">{p.term}</span>
+                    <span className="text-muted-foreground">{p.definition}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {(it.render?.pairs || []).map((p: any) => (
+                  <div key={p.term} className="p-3 border rounded-lg">
+                    <div className="mb-2 font-medium">{p.term}</div>
+                    <select
+                      className="w-full border rounded-md p-2 bg-background"
+                      value={mapping[p.term] || ""}
+                      onChange={(e) => setMapping((m) => ({ ...m, [p.term]: e.target.value }))}
+                    >
+                      <option value="">— pilih definisi —</option>
+                      {(lexiconChoices[p.term] || []).map((d: string) => (
+                        <option key={`${p.term}:${d}`} value={d}>{d}</option>
+                      ))}
+                    </select>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 2) SEQUENCE MISSING */}
+      {it.variant === "sequence_missing" && (
+        <Card>
+          <CardHeader><CardTitle>{it.prompt}</CardTitle></CardHeader>
+          <CardContent>
+            {phase === "memorize" ? (
+              <div className="flex flex-wrap gap-2">
+                {(it.render?.sequence || []).map((n: number, i: number) => (
+                  <div key={i} className="px-3 py-2 rounded-lg border bg-muted">{n}</div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {(it.render?.sequence || []).map((n: number, i: number) => {
+                  const mask = (it.render?.maskIndices || []) as number[];
+                  const at = mask.indexOf(i);
+                  if (at >= 0) {
+                    return (
+                      <Input
+                        key={i}
+                        type="number"
+                        inputMode="numeric"
+                        className="w-16 text-center"
+                        placeholder="?"
+                        value={seqInputs[at] ?? ""}
+                        onChange={(e) => {
+                          const arr = [...seqInputs];
+                          arr[at] = Number(e.target.value);
+                          setSeqInputs(arr);
+                        }}
+                      />
+                    );
+                  }
+                  return <div key={i} className="px-3 py-2 rounded-lg border bg-muted">{n}</div>;
+                })}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 3) SCENE RECALL */}
+      {it.variant === "scene_recall" && (
+        <Card>
+          <CardHeader><CardTitle>{it.prompt}</CardTitle></CardHeader>
+          <CardContent>
+            {phase === "memorize" && (
+              <div
+                className="grid border rounded-lg"
+                style={{ gridTemplateColumns: `repeat(${it.render?.grid || 4}, 48px)`, gap: 4, padding: 4 }}
+              >
+                {Array.from({ length: (it.render?.grid || 4) ** 2 }, (_, k) => {
+                  const r = Math.floor(k / (it.render?.grid || 4));
+                  const c = k % (it.render?.grid || 4);
+                  const obj = (it.render?.objects || []).find((o: any) => o.pos?.[0] === r && o.pos?.[1] === c);
+                  return (
+                    <div key={k} className="h-12 w-12 border rounded-md flex items-center justify-center bg-muted/40">
+                      {obj ? (ICONS[obj.icon] || "⬛") : ""}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {phase === "answer" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {((it.answerSpec?.options || it.options || []) as string[]).map((opt) => (
+                  <button
+                    key={opt}
+                    className={`p-3 border rounded-lg text-left hover:shadow ${selectedText === opt ? "ring-2 ring-primary" : ""}`}
+                    onClick={() => setSelectedText(opt)}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* controls */}
+      <div className="flex justify-end gap-2 mt-4">
+        <Button variant="secondary" onClick={() => (phase === "memorize" ? undefined : next())} disabled={phase === "memorize"}>
+          Lewati
+        </Button>
+        <Button onClick={() => submit(false)} disabled={phase === "memorize"}>
+          Kirim Jawaban
+        </Button>
+      </div>
+    </div>
+  );
+}

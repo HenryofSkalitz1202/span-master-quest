@@ -10,7 +10,6 @@ import { Brain, Calculator, Compass, Sparkles, Flame, Target, Trophy, Clock, Inf
 import { useTrainingStore, calcLevel, DAILY_GOAL_XP } from "@/lib/trainingStore";
 import { useNav } from "@/context/NavContext";
 
-// ganti dengan komponen asli kamu
 import MemoryChallenge from "@/components/challenges/MemoryChallenge";
 import SpatialChallenge from "@/components/challenges/SpatialChallenge";
 import NumericalChallenge from "@/components/challenges/NumericalChallenge";

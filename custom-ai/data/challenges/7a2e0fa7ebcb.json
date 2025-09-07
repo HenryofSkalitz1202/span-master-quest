@@ -1,0 +1,229 @@
+{
+  "type": "numerical",
+  "difficulty": "medium",
+  "count": 5,
+  "adaptive": true,
+  "seed": 564578659,
+  "locale": "id-ID",
+  "timeBudgetSec": 600,
+  "items": [
+    {
+      "itemId": "num_24_1",
+      "variant": "target_24",
+      "prompt": "Susun ekspresi dari keempat angka agar bernilai 24.",
+      "render": {
+        "kind": "build-expression",
+        "numbers": [
+          1,
+          5,
+          5,
+          5
+        ],
+        "operators": [
+          "+",
+          "-",
+          "×",
+          "÷"
+        ],
+        "target": 24,
+        "slots": 7
+      },
+      "answerSpec": {
+        "mode": "expression",
+        "alphabet": [
+          "0-9",
+          "+",
+          "-",
+          "×",
+          "÷",
+          "(",
+          ")"
+        ]
+      },
+      "solution": {
+        "numbers": [
+          1,
+          5,
+          5,
+          5
+        ],
+        "target": 24,
+        "oneSolution": null
+      },
+      "metadata": {
+        "mustUseAllNumbers": true,
+        "allowParentheses": true,
+        "difficulty": "easy"
+      }
+    },
+    {
+      "itemId": "num_maze_2",
+      "variant": "number_maze",
+      "prompt": "Mulai dari nilai sel awal. Pilih jalur agar nilai akhir = 33.",
+      "render": {
+        "kind": "path-grid",
+        "grid": 3,
+        "cells": [
+          [
+            4,
+            9,
+            5
+          ],
+          [
+            3,
+            5,
+            7
+          ],
+          [
+            3,
+            7,
+            1
+          ]
+        ],
+        "edges": {
+          "h": [
+            [
+              "-",
+              "+"
+            ],
+            [
+              "+",
+              "÷"
+            ],
+            [
+              "×",
+              "-"
+            ]
+          ],
+          "v": [
+            [
+              "×",
+              "÷",
+              "+"
+            ],
+            [
+              "÷",
+              "×",
+              "+"
+            ]
+          ]
+        },
+        "start": [
+          1,
+          2
+        ],
+        "target": 33,
+        "maxSteps": 4
+      },
+      "answerSpec": {
+        "mode": "path",
+        "encoding": "cells"
+      },
+      "solution": {
+        "pathCells": [
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "maxSteps": 4
+      }
+    },
+    {
+      "itemId": "num_eq_3",
+      "variant": "equation_fill",
+      "prompt": "Isi kotak agar persamaan benar.",
+      "render": {
+        "kind": "fill-blanks",
+        "expressionLeft": "3□ + □0",
+        "expressionRight": "7□",
+        "blanks": 3,
+        "constraints": {
+          "distinct": false
+        }
+      },
+      "answerSpec": {
+        "mode": "digits",
+        "count": 3
+      },
+      "solution": [
+        "2",
+        "4",
+        "2"
+      ],
+      "metadata": {
+        "difficulty": "medium",
+        "original": {
+          "left": "32 + 40",
+          "right": "72"
+        }
+      }
+    },
+    {
+      "itemId": "num_fn_4",
+      "variant": "function_machine",
+      "prompt": "Diberikan f(x)=2x + 1 dan g(x)=x / 4. Hitung f(g(28)).",
+      "render": {
+        "kind": "text",
+        "functions": {
+          "f": "2x + 1",
+          "g": "x / 4"
+        },
+        "query": "f(g(28))"
+      },
+      "answerSpec": {
+        "mode": "free",
+        "dataType": "number"
+      },
+      "solution": 15.0,
+      "metadata": {
+        "steps": [
+          "g(28)=7.0",
+          "f(7.0)=15.0"
+        ],
+        "difficulty": "medium"
+      }
+    },
+    {
+      "itemId": "num_base_5",
+      "variant": "base_convert",
+      "prompt": "Ubah 111000₂ ke basis 10.",
+      "render": {
+        "kind": "text"
+      },
+      "answerSpec": {
+        "mode": "free",
+        "dataType": "number"
+      },
+      "solution": 56,
+      "metadata": {
+        "fromBase": 2,
+        "toBase": 10,
+        "difficulty": "hard"
+      }
+    }
+  ],
+  "model": "gemini-2.5-pro",
+  "llm_used": true,
+  "_id": "7a2e0fa7ebcb",
+  "created_at": "2025-09-07T00:50:34Z"
+}
