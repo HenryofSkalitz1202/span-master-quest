@@ -75,9 +75,9 @@ type StoredAttempt = {
 // ---------- Consts ----------
 const API_BASE =
 	!import.meta.env.NODE_ENV || import.meta.env.NODE_ENV === "production"
-		? "/api"
-		: "";
-        
+		? ""
+		: "/api";
+
 const LANGS = [
   { code: "id", label: "Bahasa Indonesia" },
   { code: "en", label: "English" },
