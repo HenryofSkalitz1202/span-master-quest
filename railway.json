@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "npm install && npm run build && cd custom-ai && pip install -r requirements.txt"
+  },
+  "deploy": {
+    "startCommand": "cd custom-ai && uvicorn main:app --host 0.0.0.0 --port 8000 & npm run start"
+  }
+}
