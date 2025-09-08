@@ -809,7 +809,7 @@ def generate_spatial_bundle(rnd: random.Random, difficulty: Optional[str]) -> Li
 # ================= NUMERICAL (LOCAL FALLBACK) =============
 # ==========================================================
 # safe eval untuk 24
-_ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Num, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
+_ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
 def _safe_eval_expr(expr: str) -> float:
     expr = expr.replace("×","*").replace("÷","/").replace("^","**")
     if not re.fullmatch(r"[0-9\.\+\-\*\/\(\)\s]*", expr):
@@ -1387,7 +1387,7 @@ def generate_spatial_bundle_llm(rnd: random.Random, difficulty: Optional[str]) -
 # ========= NUMERICAL via LLM =========
 # safe eval untuk validasi hasil LLM
 if '_safe_eval_expr' not in globals():
-    _ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Num, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
+    _ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
     def _safe_eval_expr(expr: str) -> float:
         expr = expr.replace("×","*").replace("÷","/").replace("^","**")
         if not re.fullmatch(r"[0-9\.\+\-\*\/\(\)\s]*", expr):
