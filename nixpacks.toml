@@ -1,0 +1,16 @@
+providers = ["node", "python"]
+
+[phases.setup]
+nixPkgs = ["nodejs_20", "python311", "gcc"]
+
+[phases.install]
+cmds = [
+    "npm install",
+    "cd custom-ai && pip install -r requirements.txt"
+]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "cd custom-ai && uvicorn main:app --host 0.0.0.0 --port 8000 & npm run start"
