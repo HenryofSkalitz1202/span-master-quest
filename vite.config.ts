@@ -47,6 +47,7 @@ export default defineConfig(({ mode }) => {
 			// Add this for production
 			host: "0.0.0.0",
 			port: process.env.PORT ? parseInt(process.env.PORT) : 8080,
+			allowedHosts: ["matea-app-production-ce5a.up.railway.app"],
 		},
 		plugins: [react(), mode === "development" && componentTagger()].filter(
 			Boolean
