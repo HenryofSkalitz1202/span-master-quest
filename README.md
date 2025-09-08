@@ -61,12 +61,12 @@ cd matea-app
 
 Create `.env` in project root:
 ```env
-VITE_API_PROXY_TARGET=http://localhost:8000
-GEMINI_API_KEY=your_gemini_api_key_here
-GEMINI_MODEL=gemini-2.5-pro
-MONGO_URL=mongodb://localhost:27017
-MONGO_DB=matea
-ALLOW_ORIGINS=http://localhost:8080
+VITE_API_PROXY_TARGET=
+GEMINI_API_KEY=
+GEMINI_MODEL=
+MONGO_URL=
+MONGO_DB=
+ALLOW_ORIGINS=
 ```
 
 Create `.env` in `custom-ai/` directory:
