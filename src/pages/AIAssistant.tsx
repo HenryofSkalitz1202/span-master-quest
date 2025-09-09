@@ -10,8 +10,9 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Mic, MicOff, Volume2, VolumeX, Send, User, Bot } from "lucide-react";
+import { Mic, MicOff, Volume2, VolumeX, Send, User, Bot, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { getAIChatResponse } from "@/lib/api";
 
 const AIAssistant = () => {
 	const [selectedVoice, setSelectedVoice] = useState("aria");
@@ -19,6 +20,7 @@ const AIAssistant = () => {
 	const [isRecording, setIsRecording] = useState(false);
 	const [isSpeaking, setIsSpeaking] = useState(false);
 	const [inputText, setInputText] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const [conversation, setConversation] = useState<
 		Array<{
 			id: number;
@@ -74,8 +76,8 @@ const AIAssistant = () => {
 		},
 	];
 
-	const handleSendMessage = () => {
-		if (!inputText.trim()) return;
+	const handleSendMessage = async () => {
+		if (!inputText.trim() || isLoading) return;
 
 		const userMessage = {
 			id: conversation.length + 1,
@@ -86,19 +88,30 @@ const AIAssistant = () => {
 
 		setConversation((prev) => [...prev, userMessage]);
 		setInputText("");
+		setIsLoading(true);
 
-		// Simulate AI response
-		setTimeout(() => {
+		try {
+			const aiData = await getAIChatResponse(inputText);
 			const aiResponse = {
 				id: conversation.length + 2,
 				sender: "ai" as const,
-				message: `Terima kasih atas pertanyaan Anda tentang "${inputText}". Saya akan menjelaskan dengan detail dan contoh yang mudah dipahami. Apakah ada bagian tertentu yang ingin Anda fokuskan?`,
+				message: aiData.response,
 				timestamp: new Date(),
 			};
 			setConversation((prev) => [...prev, aiResponse]);
-			setIsSpeaking(true);
-			setTimeout(() => setIsSpeaking(false), 3000);
-		}, 1000);
+			setIsSpeaking(true); // Optional: trigger text-to-speech
+		} catch (error) {
+			console.error("Error getting AI response:", error);
+			const errorResponse = {
+				id: conversation.length + 2,
+				sender: "ai" as const,
+				message: "Maaf, terjadi kesalahan saat memproses permintaan Anda.",
+				timestamp: new Date(),
+			};
+			setConversation((prev) => [...prev, errorResponse]);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const toggleRecording = () => {
@@ -292,6 +305,19 @@ const AIAssistant = () => {
 											</div>
 										</div>
 									))}
+									{isLoading && (
+										<div className="flex gap-3">
+											<Avatar className="h-8 w-8 flex-shrink-0">
+												<AvatarImage src={getCurrentAvatar().image} />
+												<AvatarFallback className="bg-gradient-primary text-primary-foreground">
+													{getCurrentAvatar().name[0]}
+												</AvatarFallback>
+											</Avatar>
+											<div className="flex-1 max-w-[calc(100%-4rem)] p-3 rounded-lg bg-muted flex items-center">
+												<Loader2 className="h-5 w-5 animate-spin" />
+											</div>
+										</div>
+									)}
 								</div>
 
 								{/* Input Area */}
@@ -313,6 +339,7 @@ const AIAssistant = () => {
 													handleSendMessage();
 												}
 											}}
+											disabled={isLoading}
 										/>
 										<div className="flex flex-col gap-2 flex-shrink-0">
 											<Button
@@ -323,6 +350,7 @@ const AIAssistant = () => {
 												}
 												size="sm"
 												onClick={toggleRecording}
+												disabled={isLoading}
 											>
 												{isRecording ? (
 													<MicOff className="h-4 w-4" />
@@ -340,6 +368,7 @@ const AIAssistant = () => {
 												onClick={() =>
 													setIsSpeaking(!isSpeaking)
 												}
+												disabled={isLoading}
 											>
 												{isSpeaking ? (
 													<VolumeX className="h-4 w-4" />
@@ -349,11 +378,11 @@ const AIAssistant = () => {
 											</Button>
 											<Button
 												onClick={handleSendMessage}
-												disabled={!inputText.trim()}
+												disabled={!inputText.trim() || isLoading}
 												className="bg-gradient-primary hover:bg-gradient-primary/90"
 												size="sm"
 											>
-												<Send className="h-4 w-4" />
+												{isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
 											</Button>
 										</div>
 									</div>
@@ -390,6 +419,7 @@ const AIAssistant = () => {
 									variant="outline"
 									className="h-auto p-3 text-left justify-start"
 									onClick={() => setInputText(question)}
+									disabled={isLoading}
 								>
 									<span className="text-sm">{question}</span>
 								</Button>

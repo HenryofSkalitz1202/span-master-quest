@@ -54,3 +54,22 @@ export async function createChallenge(
 	}
 	return res.json();
 }
+
+export async function getAIChatResponse(
+  text: string,
+  output_language = "id"
+): Promise<{ response: string }> {
+  const formData = new FormData();
+  formData.append("text", text);
+  formData.append("output_language", output_language);
+
+  const res = await fetch(`${API_BASE}/chat/completion`, {
+    method: "POST",
+    body: formData,
+  });
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error(`getAIChatResponse failed: ${res.status} ${txt}`);
+  }
+  return res.json();
+}

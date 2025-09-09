@@ -404,7 +404,24 @@ async def summary_from_files(
         "meta": {"model": MODEL_NAME, "file_count": len(files), "language": output_language}
     }
 
+@app.post("/chat/completion")
+async def chat_completion(
+    text: str = Form(...),
+    output_language: str = "id",
+):
+    prompt = (
+        f"Anda adalah Matea, asisten AI yang ramah dan membantu. "
+        f"Jawab pertanyaan berikut dalam bahasa {lang_display(output_language)} "
+        f"dengan cara yang mudah dipahami, seolah-olah Anda sedang mengajar. "
+        f"Pertanyaan: {text}"
+    )
 
+    # Use a different generation config for chat, without forcing JSON
+    chat_model = genai.GenerativeModel(MODEL_NAME, generation_config={"temperature": 0.7})
+    
+    resp = chat_model.generate_content([prompt])
+
+    return {"response": resp.text}
 
 # ============================================
 # == COMPLETION BLOCK: Local Generators & IO ==
