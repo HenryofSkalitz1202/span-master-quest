@@ -53,27 +53,15 @@ const AIAssistant = () => {
 		{
 			id: "teacher",
 			name: "Guru Matea",
-			image: "/api/placeholder/64/64",
+			image: "src/assets/teacher-icon.jpg",
 			description: "Avatar guru yang berpengalaman",
 		},
 		{
 			id: "student",
 			name: "Teman Belajar",
-			image: "/api/placeholder/64/64",
+			image: "src/assets/friend-icon.png",
 			description: "Avatar teman sebaya",
-		},
-		{
-			id: "professor",
-			name: "Profesor",
-			image: "/api/placeholder/64/64",
-			description: "Avatar akademisi senior",
-		},
-		{
-			id: "tutor",
-			name: "Tutor Pribadi",
-			image: "/api/placeholder/64/64",
-			description: "Avatar tutor personal",
-		},
+		}
 	];
 
 	const handleSendMessage = async () => {
@@ -92,7 +80,7 @@ const AIAssistant = () => {
 		setIsLoading(true);
 
 		try {
-			const aiData = await getAIChatResponse(textToProcess);
+			const aiData = await getAIChatResponse(textToProcess, selectedAvatar);
 			const aiResponse = {
 				id: conversation.length + 2,
 				sender: "ai" as const,
@@ -101,8 +89,8 @@ const AIAssistant = () => {
 			};
 			setConversation((prev) => [...prev, aiResponse]);
 			
+			// Logika text-to-speech tetap sama
 			if (isSupported && selectedVoice) {
-				// Gunakan fungsi pembersih di sini
 				const textToSpeak = cleanTextForSpeech(aiData.response);
 				speak(textToSpeak, selectedVoice);
 			}

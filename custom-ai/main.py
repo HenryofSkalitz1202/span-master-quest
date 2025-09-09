@@ -407,16 +407,24 @@ async def summary_from_files(
 @app.post("/chat/completion")
 async def chat_completion(
     text: str = Form(...),
+    avatar: str = Form("teacher"), 
     output_language: str = "id",
 ):
-    prompt = (
-        f"Anda adalah Matea, asisten AI yang ramah dan membantu. "
-        f"Jawab pertanyaan berikut dalam bahasa {lang_display(output_language)} "
-        f"dengan cara yang mudah dipahami, seolah-olah Anda sedang mengajar. "
-        f"Pertanyaan: {text}"
-    )
+    if avatar == "student":
+        prompt = (
+            f"Anda adalah Matea, seorang teman belajar yang asyik dan pintar. "
+            f"Jelaskan pertanyaan berikut menggunakan bahasa sehari-hari yang santai dalam bahasa {lang_display(output_language)}. "
+            f"Gunakan banyak analogi atau perumpamaan sederhana agar mudah dimengerti. Hindari bahasa yang terlalu teknis atau formal. "
+            f"Pertanyaan: {text}"
+        )
+    else:
+        prompt = (
+            f"Anda adalah Guru Matea, seorang asisten AI pendidik yang profesional dan berpengetahuan luas. "
+            f"Jawab pertanyaan berikut secara mendalam dan terstruktur dalam bahasa {lang_display(output_language)}. "
+            f"Gunakan terminologi teknis yang tepat dan jelaskan konsep secara formal seolah-olah Anda sedang mengajar di kelas. "
+            f"Pertanyaan: {text}"
+        )
 
-    # Use a different generation config for chat, without forcing JSON
     chat_model = genai.GenerativeModel(MODEL_NAME, generation_config={"temperature": 0.7})
     
     resp = chat_model.generate_content([prompt])
