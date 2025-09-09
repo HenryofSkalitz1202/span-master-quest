@@ -310,14 +310,37 @@ const AIAssistant = () => {
 						<div className="container mx-auto max-w-4xl">
 							{/* Chat Interface */}
 							<Card className="h-[calc(100vh-10rem)] flex flex-col">
-								<CardHeader className="flex-shrink-0">
-									<CardTitle className="flex items-center gap-2">
+								<CardHeader className="flex-shrink-0 flex flex-row items-center justify-between">
+									<div className="flex items-center gap-2">
 										<Avatar className="h-8 w-8">
 											<AvatarImage src={getCurrentAvatar().image} />
 											<AvatarFallback>{getCurrentAvatar().name[0]}</AvatarFallback>
 										</Avatar>
-										Percakapan dengan {getCurrentAvatar().name}
-									</CardTitle>
+										<CardTitle>
+											Percakapan dengan {getCurrentAvatar().name}
+										</CardTitle>
+									</div>
+									<div className="w-1/3">
+										<Select
+											value={selectedVoice}
+											onValueChange={setSelectedVoice}
+											disabled={!isSupported || voices.length === 0}
+										>
+											<SelectTrigger>
+												<SelectValue placeholder="Pilih suara..." />
+											</SelectTrigger>
+											<SelectContent>
+												{voices.map((voice) => (
+													<SelectItem
+														key={voice.name}
+														value={voice.name}
+													>
+														{voice.name} ({voice.lang})
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
+									</div>
 								</CardHeader>
 
 								<CardContent className="flex-1 flex flex-col min-h-0 p-4">
@@ -326,8 +349,8 @@ const AIAssistant = () => {
 											<div
 												key={msg.id}
 												className={`flex gap-3 ${msg.sender === "user"
-													? "flex-row-reverse"
-													: ""
+														? "flex-row-reverse"
+														: ""
 													}`}
 											>
 												<Avatar className="h-8 w-8 flex-shrink-0">
