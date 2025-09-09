@@ -57,10 +57,12 @@ export async function createChallenge(
 
 export async function getAIChatResponse(
   text: string,
+  avatar: string,
   output_language = "id"
 ): Promise<{ response: string }> {
   const formData = new FormData();
   formData.append("text", text);
+  formData.append("avatar", avatar);
   formData.append("output_language", output_language);
 
   const res = await fetch(`${API_BASE}/chat/completion`, {
