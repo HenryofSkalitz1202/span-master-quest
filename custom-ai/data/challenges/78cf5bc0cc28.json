@@ -3,7 +3,7 @@
   "difficulty": "medium",
   "count": 5,
   "adaptive": true,
-  "seed": 564176600,
+  "seed": 747016962,
   "locale": "id-ID",
   "timeBudgetSec": 600,
   "items": [
@@ -15,8 +15,8 @@
         "kind": "match",
         "pairs": [
           {
-            "term": "titiang",
-            "definition": "saya",
+            "term": "nampiin",
+            "definition": "membereskan",
             "region": "Bali"
           },
           {
@@ -30,14 +30,14 @@
             "region": "Bali"
           },
           {
-            "term": "suksma",
-            "definition": "terima kasih",
+            "term": "sing",
+            "definition": "tidak",
             "region": "Bali"
           }
         ],
         "distractors": [
-          "berjalan",
-          "permisi"
+          "permisi",
+          "makan"
         ],
         "displayMs": 12000,
         "revealMode": "sequential"
@@ -45,25 +45,25 @@
       "answerSpec": {
         "mode": "mapping",
         "leftKeys": [
-          "titiang",
+          "nampiin",
           "ulung",
           "meli",
-          "suksma"
+          "sing"
         ],
         "rightOptions": [
-          "saya",
+          "membereskan",
           "meminjam",
           "membeli",
-          "terima kasih",
-          "berjalan",
-          "permisi"
+          "tidak",
+          "permisi",
+          "makan"
         ]
       },
       "solution": {
-        "titiang": "saya",
+        "nampiin": "membereskan",
         "ulung": "meminjam",
         "meli": "membeli",
-        "suksma": "terima kasih"
+        "sing": "tidak"
       },
       "metadata": {
         "region": "Bali",
@@ -73,34 +73,34 @@
     {
       "itemId": "mem_lx_2",
       "variant": "lexicon_match",
-      "prompt": "Ingat pasangan istilah Minang berikut, lalu pasangkan definisinya.",
+      "prompt": "Ingat pasangan istilah Jawa berikut, lalu pasangkan definisinya.",
       "render": {
         "kind": "match",
         "pairs": [
           {
-            "term": "indak",
+            "term": "mangan",
+            "definition": "makan",
+            "region": "Jawa"
+          },
+          {
+            "term": "pamit",
+            "definition": "permisi",
+            "region": "Jawa"
+          },
+          {
+            "term": "suwun",
+            "definition": "terima kasih",
+            "region": "Jawa"
+          },
+          {
+            "term": "ora",
             "definition": "tidak",
-            "region": "Minang"
-          },
-          {
-            "term": "pai",
-            "definition": "pergi",
-            "region": "Minang"
-          },
-          {
-            "term": "ciek",
-            "definition": "satu",
-            "region": "Minang"
-          },
-          {
-            "term": "bapikir",
-            "definition": "berpikir",
-            "region": "Minang"
+            "region": "Jawa"
           }
         ],
         "distractors": [
           "berjalan",
-          "terima kasih"
+          "tidak tahu"
         ],
         "displayMs": 12000,
         "revealMode": "sequential"
@@ -108,28 +108,28 @@
       "answerSpec": {
         "mode": "mapping",
         "leftKeys": [
-          "indak",
-          "pai",
-          "ciek",
-          "bapikir"
+          "mangan",
+          "pamit",
+          "suwun",
+          "ora"
         ],
         "rightOptions": [
+          "makan",
+          "permisi",
+          "terima kasih",
           "tidak",
-          "pergi",
-          "satu",
-          "berpikir",
           "berjalan",
-          "terima kasih"
+          "tidak tahu"
         ]
       },
       "solution": {
-        "indak": "tidak",
-        "pai": "pergi",
-        "ciek": "satu",
-        "bapikir": "berpikir"
+        "mangan": "makan",
+        "pamit": "permisi",
+        "suwun": "terima kasih",
+        "ora": "tidak"
       },
       "metadata": {
-        "region": "Minang",
+        "region": "Jawa",
         "pairsCount": 4
       }
     },
@@ -140,19 +140,19 @@
       "render": {
         "kind": "sequence",
         "sequence": [
-          1,
-          5,
-          5,
-          7,
-          0,
+          4,
           9,
-          5
+          9,
+          8,
+          0,
+          6,
+          7
         ],
         "displayMs": 500,
         "gapMs": 200,
         "maskIndices": [
-          4,
-          5
+          2,
+          4
         ]
       },
       "answerSpec": {
@@ -160,8 +160,8 @@
         "dataType": "number[]"
       },
       "solution": [
-        0,
-        9
+        9,
+        0
       ],
       "metadata": {
         "length": 7,
@@ -175,19 +175,19 @@
       "render": {
         "kind": "sequence",
         "sequence": [
-          5,
           9,
           9,
-          1,
-          9,
-          2,
-          4
+          8,
+          0,
+          3,
+          0,
+          8
         ],
         "displayMs": 500,
         "gapMs": 200,
         "maskIndices": [
           1,
-          6
+          5
         ]
       },
       "answerSpec": {
@@ -196,7 +196,7 @@
       },
       "solution": [
         9,
-        4
+        0
       ],
       "metadata": {
         "length": 7,
@@ -214,59 +214,54 @@
           {
             "id": "obj1",
             "pos": [
-              3,
-              0
+              2,
+              2
             ],
-            "icon": "car",
-            "color": "#10B981"
+            "icon": "boat",
+            "color": "#EF4444"
           },
           {
             "id": "obj2",
             "pos": [
-              3,
+              2,
               1
             ],
-            "icon": "school",
-            "color": "#3B82F6"
+            "icon": "bench",
+            "color": "#F59E0B"
           },
           {
             "id": "obj3",
             "pos": [
               0,
-              3
+              1
             ],
-            "icon": "bench",
-            "color": "#8B5CF6"
+            "icon": "school",
+            "color": "#F59E0B"
           }
         ],
         "change": {
-          "type": "moved",
-          "targetId": "obj3",
-          "to": [
-            2,
-            1
-          ]
+          "type": "removed",
+          "targetId": "obj1"
         }
       },
       "answerSpec": {
         "mode": "single_choice",
         "options": [
-          "obj1@3-0",
-          "obj2@3-1",
-          "obj3@0-3",
-          "obj3@2-1"
+          "obj1",
+          "obj2",
+          "obj3"
         ]
       },
-      "solution": "obj3@2-1",
+      "solution": "obj1",
       "metadata": {
         "grid": 4,
         "objects": 3,
-        "change": "moved"
+        "change": "removed"
       }
     }
   ],
   "model": "gemini-2.5-pro",
   "llm_used": true,
-  "_id": "af0895890f2d",
-  "created_at": "2025-09-07T00:43:29Z"
+  "_id": "78cf5bc0cc28",
+  "created_at": "2025-09-09T03:31:13Z"
 }

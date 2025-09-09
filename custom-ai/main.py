@@ -404,7 +404,32 @@ async def summary_from_files(
         "meta": {"model": MODEL_NAME, "file_count": len(files), "language": output_language}
     }
 
+@app.post("/chat/completion")
+async def chat_completion(
+    text: str = Form(...),
+    avatar: str = Form("teacher"), 
+    output_language: str = "id",
+):
+    if avatar == "student":
+        prompt = (
+            f"Anda adalah Matea, seorang teman belajar yang asyik dan pintar. "
+            f"Jelaskan pertanyaan berikut menggunakan bahasa sehari-hari yang santai dalam bahasa {lang_display(output_language)}. "
+            f"Gunakan banyak analogi atau perumpamaan sederhana agar mudah dimengerti. Hindari bahasa yang terlalu teknis atau formal. "
+            f"Pertanyaan: {text}"
+        )
+    else:
+        prompt = (
+            f"Anda adalah Guru Matea, seorang asisten AI pendidik yang profesional dan berpengetahuan luas. "
+            f"Jawab pertanyaan berikut secara mendalam dan terstruktur dalam bahasa {lang_display(output_language)}. "
+            f"Gunakan terminologi teknis yang tepat dan jelaskan konsep secara formal seolah-olah Anda sedang mengajar di kelas. "
+            f"Pertanyaan: {text}"
+        )
 
+    chat_model = genai.GenerativeModel(MODEL_NAME, generation_config={"temperature": 0.7})
+    
+    resp = chat_model.generate_content([prompt])
+
+    return {"response": resp.text}
 
 # ============================================
 # == COMPLETION BLOCK: Local Generators & IO ==
@@ -809,7 +834,7 @@ def generate_spatial_bundle(rnd: random.Random, difficulty: Optional[str]) -> Li
 # ================= NUMERICAL (LOCAL FALLBACK) =============
 # ==========================================================
 # safe eval untuk 24
-_ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Num, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
+_ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
 def _safe_eval_expr(expr: str) -> float:
     expr = expr.replace("×","*").replace("÷","/").replace("^","**")
     if not re.fullmatch(r"[0-9\.\+\-\*\/\(\)\s]*", expr):
@@ -1387,7 +1412,7 @@ def generate_spatial_bundle_llm(rnd: random.Random, difficulty: Optional[str]) -
 # ========= NUMERICAL via LLM =========
 # safe eval untuk validasi hasil LLM
 if '_safe_eval_expr' not in globals():
-    _ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Num, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
+    _ALLOWED_NODES = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.USub, ast.UAdd, ast.Pow, ast.Load)
     def _safe_eval_expr(expr: str) -> float:
         expr = expr.replace("×","*").replace("÷","/").replace("^","**")
         if not re.fullmatch(r"[0-9\.\+\-\*\/\(\)\s]*", expr):

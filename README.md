@@ -1,73 +1,173 @@
-# Welcome to your Lovable project
+# Matea App - Focus. Unlock. Achieve.
 
-## Project info
+An AI-powered cognitive training application that helps build focus, improve concentration, and unlock mental potential through gamified daily challenges and interactive learning materials.
 
-**URL**: https://lovable.dev/projects/d3482421-c95b-4da6-a272-a0dcfe867b31
+## Features
 
-## How can I edit this code?
+### 🧠 Cognitive Training
+- **Memory Challenges**: Lexicon matching, sequence recall, scene memory
+- **Spatial Challenges**: Map rotation, route navigation, mirror reflection
+- **Numerical Challenges**: 24-game, number mazes, equation filling
+- **Adaptive Difficulty**: AI adjusts challenge complexity based on performance
 
-There are several ways of editing your application.
+### 📚 AI Learning Materials
+- **PDF-to-Quiz Generation**: Upload PDFs and generate interactive quizzes
+- **Smart Summarization**: AI-powered content summaries
+- **Multi-language Support**: 11 languages including Indonesian, English, Spanish, etc.
+- **Interactive Quiz Interface**: Quizizz-style gameplay with timers and explanations
 
-**Use Lovable**
+### 🤖 AI Assistant
+- **Voice-Enabled Chat**: Speak and listen to AI responses
+- **Multiple Avatars**: Choose from teacher, tutor, professor personas
+- **Voice Selection**: Different AI voices for personalized experience
+- **Educational Focus**: Specialized in explaining learning materials
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d3482421-c95b-4da6-a272-a0dcfe867b31) and start prompting.
+### 📊 Progress Tracking
+- **XP System**: Earn experience points and level up
+- **Streak Tracking**: Maintain daily training streaks
+- **Performance Analytics**: Track focus time, accuracy, and improvement
+- **Achievement System**: Unlock badges and milestones
 
-Changes made via Lovable will be committed automatically to this repo.
+## Tech Stack
 
-**Use your preferred IDE**
+**Frontend:**
+- React 18 + TypeScript
+- Vite build tool
+- Tailwind CSS + shadcn/ui components
+- React Router for navigation
+- Zustand for state management
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**Backend:**
+- Python FastAPI
+- Google Gemini AI integration
+- File upload handling (PDF processing)
+- Local storage + optional MongoDB
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Prerequisites
 
-Follow these steps:
+- Node.js 18+ & npm
+- Python 3.8+
+- Google Gemini API key ([Get here](https://makersuite.google.com/app/apikey))
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 1. Clone Repository
+```bash
+git clone <repository-url>
+cd matea-app
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 2. Environment Setup
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Create `.env` in project root:
+```env
+VITE_API_PROXY_TARGET=
+GEMINI_API_KEY=
+GEMINI_MODEL=
+MONGO_URL=
+MONGO_DB=
+ALLOW_ORIGINS=
+```
+
+Create `.env` in `custom-ai/` directory:
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### 3. Backend Setup
+```bash
+cd custom-ai
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 4. Frontend Setup
+```bash
+# In project root
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Usage
 
-**Use GitHub Codespaces**
+### Getting Started
+1. Open the app and navigate to **Dashboard**
+2. Complete daily challenges to build your streak
+3. Upload PDFs in **Learning Materials** to generate quizzes
+4. Chat with the **AI Assistant** for help with concepts
+5. Track your progress and level up through consistent training
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Creating Quizzes
+1. Go to **Learning Materials**
+2. Upload a PDF file
+3. Configure quiz settings (number of questions, difficulty, language)
+4. Click "Generate Quiz with AI"
+5. Take the interactive quiz or export as CSV
 
-## What technologies are used for this project?
+### Training Challenges
+1. Visit **Training** section
+2. Choose from Memory, Spatial, or Numerical challenges
+3. Complete adaptive difficulty sessions
+4. Earn XP and maintain your streak
 
-This project is built with:
+## API Endpoints
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Key backend endpoints:
+- `POST /quiz/from-files` - Generate quiz from uploaded files
+- `POST /summary/from-files` - Create content summaries
+- `POST /v1/challenges/new` - Create cognitive challenges
+- `POST /quiz/attempts` - Submit quiz results
+- `GET /health` - Health check
 
-## How can I deploy this project?
+## Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/d3482421-c95b-4da6-a272-a0dcfe867b31) and click on Share -> Publish.
+```
+matea-app/
+├── src/
+│   ├── components/          # React components
+│   │   ├── challenges/      # Cognitive challenge components
+│   │   └── ui/             # Reusable UI components
+│   ├── pages/              # Main page components
+│   ├── lib/                # Utilities and API clients
+│   └── context/            # React context providers
+├── custom-ai/              # Python FastAPI backend
+│   ├── main.py            # FastAPI application
+│   └── requirements.txt   # Python dependencies
+└── public/                # Static assets
+```
 
-## Can I connect a custom domain to my Lovable project?
+## Development
 
-Yes, you can!
+### Frontend Development
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run lint         # Run ESLint
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Backend Development
+```bash
+cd custom-ai
+uvicorn main:app --reload    # Auto-reload on changes
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Adding New Challenges
+1. Create challenge generator in `custom-ai/main.py`
+2. Add frontend component in `src/components/challenges/`
+3. Update challenge types in `src/lib/api.ts`
+
+## Configuration
+
+### Challenge Settings
+- Modify difficulty algorithms in backend challenge generators
+- Adjust scoring formulas in `src/lib/trainingStore.ts`
+- Configure timers and XP values in component constants
+
+### AI Integration
+- Update Gemini model in environment variables
+- Modify prompts in backend for different AI behaviors
+- Add new languages to supported language list
+
+

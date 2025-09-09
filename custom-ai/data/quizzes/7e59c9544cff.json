@@ -1,0 +1,136 @@
+{
+  "_id": "7e59c9544cff",
+  "created_at": "2025-09-09T03:39:45Z",
+  "model": "gemini-2.5-pro",
+  "items": [
+    {
+      "pertanyaan": "Apa langkah pertama yang dilakukan oleh bot Fireflies.ai ketika akan memproses sebuah rapat virtual yang terjadwal?",
+      "opsi": [
+        "A. Menganalisis sentimen pembicara.",
+        "B. Bergabung ke dalam rapat sebagai peserta virtual melalui integrasi kalender.",
+        "C. Menghasilkan ringkasan rapat secara otomatis.",
+        "D. Mengubah ucapan menjadi teks menggunakan ASR."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Berdasarkan bagian 2.1, proses dimulai ketika bot pencatat Fireflies.ai bergabung dalam rapat sebagai peserta virtual, yang pemicu paling umumnya adalah integrasi kalender (Google atau Outlook).",
+      "id": "q1"
+    },
+    {
+      "pertanyaan": "Teknologi apa yang menjadi dasar bagi Fireflies.ai untuk mengubah bahasa lisan menjadi teks?",
+      "opsi": [
+        "A. Natural Language Processing (NLP)",
+        "B. Generative AI seperti GPT-4",
+        "C. Automatic Speech Recognition (ASR)",
+        "D. Speaker Diarization (Diarisasi Pembicara)"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Bagian 2.2 secara eksplisit menyatakan bahwa Automatic Speech Recognition (ASR) adalah lapisan fundamental yang bertanggung jawab untuk mengubah bahasa lisan menjadi teks.",
+      "id": "q2"
+    },
+    {
+      "pertanyaan": "Proses mengidentifikasi 'siapa yang mengatakan apa' dalam transkrip rapat dikenal sebagai...",
+      "opsi": [
+        "A. Analisis Sentimen",
+        "B. Pengenalan Entitas",
+        "C. Pelacakan Topik",
+        "D. Diarisasi Pembicara"
+      ],
+      "jawaban": "D",
+      "penjelasan": "Bagian 2.3 menjelaskan bahwa Diarisasi Pembicara adalah proses untuk menentukan siapa yang mengatakan apa dengan menganalisis karakteristik vokal unik untuk membuat 'sidik suara' (voiceprint).",
+      "id": "q3"
+    },
+    {
+      "pertanyaan": "Manakah di antara berikut ini yang BUKAN merupakan contoh 'Pengenalan Entitas' yang dilakukan oleh lapisan NLP & NLU Fireflies.ai?",
+      "opsi": [
+        "A. Menandai Item Tindakan (Action Items) dalam teks.",
+        "B. Mengidentifikasi tanggal dan metrik spesifik.",
+        "C. Mengkategorikan pernyataan sebagai positif, negatif, atau netral.",
+        "D. Mengenali pertanyaan yang diajukan selama diskusi."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Mengkategorikan pernyataan sebagai positif, negatif, atau netral adalah fungsi dari 'Analisis Sentimen', bukan 'Pengenalan Entitas'. Pengenalan Entitas fokus pada item spesifik seperti tugas, pertanyaan, tanggal, dan metrik, seperti yang dijelaskan di bagian 2.4.",
+      "id": "q4"
+    },
+    {
+      "pertanyaan": "Fitur Fireflies.ai yang berfungsi seperti ChatGPT dan memungkinkan pengguna untuk mengajukan pertanyaan langsung tentang isi rapat mereka disebut...",
+      "opsi": [
+        "A. Topic Tracker",
+        "B. AskFred",
+        "C. AI Summary",
+        "D. Voiceprint AI"
+      ],
+      "jawaban": "B",
+      "penjelasan": "Bagian 2.5 menjelaskan 'AskFred' sebagai Asisten AI Percakapan yang berfungsi seperti ChatGPT, yang dikhususkan untuk data rapat pengguna.",
+      "id": "q5"
+    },
+    {
+      "pertanyaan": "Selain bergabung secara otomatis ke rapat, bagaimana cara lain pengguna dapat memproses konten mereka menggunakan Fireflies.ai?",
+      "opsi": [
+        "A. Dengan menelepon nomor khusus Fireflies.ai.",
+        "B. Dengan mengunggah file audio atau video secara langsung ke platform.",
+        "C. Dengan menyiarkan langsung dari mikrofon ke platform.",
+        "D. Dengan mengirimkan catatan rapat manual untuk dianalisis."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Pada akhir bagian 2.1, disebutkan bahwa untuk konten yang tidak terjadi secara real-time, pengguna dapat mengunggah berbagai format file audio dan video (misalnya, MP3, MP4, WAV, M4A) langsung ke platform.",
+      "id": "q6"
+    },
+    {
+      "pertanyaan": "Menurut teks, model deep learning apa yang kemungkinan besar digunakan oleh mesin ASR Fireflies.ai untuk memproses data sekuensial seperti ucapan manusia?",
+      "opsi": [
+        "A. Generative Adversarial Networks (GANs)",
+        "B. Convolutional Neural Networks (CNNs)",
+        "C. Recurrent Neural Networks (RNNs) dan Long Short-Term Memory (LSTM)",
+        "D. Support Vector Machines (SVMs)"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Bagian 2.2 menyebutkan bahwa platform ini menggunakan algoritma pengenalan ucapan canggih, yang kemungkinan besar didasarkan pada model deep learning seperti Recurrent Neural Networks (RNNs) dan Long Short-Term Memory (LSTM) networks.",
+      "id": "q7"
+    },
+    {
+      "pertanyaan": "Apa tujuan utama dari fitur 'Analisis Sentimen' dalam alur kerja Fireflies.ai?",
+      "opsi": [
+        "A. Untuk menghitung jumlah kata kunci yang disebutkan.",
+        "B. Untuk memberikan gambaran tentang nada emosional percakapan (positif, negatif, netral).",
+        "C. Untuk mengidentifikasi siapa pembicara yang paling aktif.",
+        "D. Untuk membuat ringkasan poin-poin keputusan penting."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Bagian 2.4 menjelaskan bahwa Analisis Sentimen mengidentifikasi dan mengkategorikan pernyataan sebagai positif, negatif, atau netral untuk memberikan gambaran tentang nada emosional percakapan.",
+      "id": "q8"
+    },
+    {
+      "pertanyaan": "Fitur 'Ringkasan AI' pada Fireflies.ai secara eksplisit disebutkan didukung oleh teknologi apa?",
+      "opsi": [
+        "A. RNN dan LSTM",
+        "B. Algoritma milik Fireflies.ai sendiri",
+        "C. GPT-3 dan GPT-4",
+        "D. Model NLP dari Google"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada bagian 2.5, teks secara eksplisit menyebutkan penggunaan teknologi yang didukung oleh GPT-3 dan GPT-4 untuk menghasilkan ringkasan rapat yang ringkas.",
+      "id": "q9"
+    },
+    {
+      "pertanyaan": "Ringkasan teks menggambarkan alur kerja Fireflies.ai sebagai 'rantai nilai abstraksi data'. Apa arti dari konsep ini?",
+      "opsi": [
+        "A. Sistem ini hanya menyalin data audio mentah ke cloud tanpa perubahan.",
+        "B. Sistem ini secara bertahap mengubah data mentah bernilai rendah (audio) menjadi wawasan bernilai tinggi (ringkasan, jawaban).",
+        "C. Sistem ini mengenkripsi data di setiap tahap untuk keamanan maksimal.",
+        "D. Sistem ini menjual data mentah pengguna ke pihak ketiga untuk mendapatkan nilai."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Paragraf 'Ringkasan' menjelaskan bahwa sistem ini secara sistematis mengubah tipe data bervolume tinggi dan bernilai rendah (audio mentah) menjadi tipe data bervolume rendah dan bernilai tinggi (wawasan dan jawaban). Setiap tahap menambahkan lapisan struktur dan makna, yang merupakan inti dari abstraksi data.",
+      "id": "q10"
+    }
+  ],
+  "meta": {
+    "source": "files",
+    "file_count": 1,
+    "difficulty": "mixed",
+    "n": 10,
+    "language": "id",
+    "include_explanation": true,
+    "topic_filter": null
+  }
+}
