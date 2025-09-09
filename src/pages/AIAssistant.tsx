@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,12 +13,23 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Mic, MicOff, Volume2, VolumeX, Send, User, Bot, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getAIChatResponse } from "@/lib/api";
+import { useSpeechSynthesis } from "@/hooks/useSpeechSyntesis";
 
 const AIAssistant = () => {
-	const [selectedVoice, setSelectedVoice] = useState("aria");
+	const { isSupported, isSpeaking, voices, speak, stop } = useSpeechSynthesis();
+
+	const defaultVoiceName = voices.find(v => v.lang.startsWith("id-ID"))?.name || voices[0]?.name;
+	const [selectedVoice, setSelectedVoice] = useState("");
+
+	useEffect(() => {
+		if (defaultVoiceName) {
+			setSelectedVoice(defaultVoiceName);
+		}
+	}, [defaultVoiceName]);
+
+
 	const [selectedAvatar, setSelectedAvatar] = useState("teacher");
 	const [isRecording, setIsRecording] = useState(false);
-	const [isSpeaking, setIsSpeaking] = useState(false);
 	const [inputText, setInputText] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [conversation, setConversation] = useState<
@@ -37,17 +48,6 @@ const AIAssistant = () => {
 			timestamp: new Date(),
 		},
 	]);
-
-	const voices = [
-		{ id: "aria", name: "Aria", description: "Suara wanita yang ramah" },
-		{ id: "roger", name: "Roger", description: "Suara pria yang tegas" },
-		{ id: "sarah", name: "Sarah", description: "Suara wanita yang lembut" },
-		{
-			id: "charlie",
-			name: "Charlie",
-			description: "Suara pria yang hangat",
-		},
-	];
 
 	const avatars = [
 		{
@@ -87,11 +87,12 @@ const AIAssistant = () => {
 		};
 
 		setConversation((prev) => [...prev, userMessage]);
+		const textToProcess = inputText;
 		setInputText("");
 		setIsLoading(true);
 
 		try {
-			const aiData = await getAIChatResponse(inputText);
+			const aiData = await getAIChatResponse(textToProcess);
 			const aiResponse = {
 				id: conversation.length + 2,
 				sender: "ai" as const,
@@ -99,7 +100,13 @@ const AIAssistant = () => {
 				timestamp: new Date(),
 			};
 			setConversation((prev) => [...prev, aiResponse]);
-			setIsSpeaking(true); // Optional: trigger text-to-speech
+			
+			if (isSupported && selectedVoice) {
+				// Gunakan fungsi pembersih di sini
+				const textToSpeak = cleanTextForSpeech(aiData.response);
+				speak(textToSpeak, selectedVoice);
+			}
+
 		} catch (error) {
 			console.error("Error getting AI response:", error);
 			const errorResponse = {
@@ -118,8 +125,27 @@ const AIAssistant = () => {
 		setIsRecording(!isRecording);
 	};
 
+	const handlePlaybackToggle = () => {
+		if (isSpeaking) {
+			stop();
+		} else {
+			const lastAiMessage = [...conversation].reverse().find(m => m.sender === 'ai');
+			if (lastAiMessage && isSupported && selectedVoice) {
+				speak(lastAiMessage.message, selectedVoice);
+			}
+		}
+	}
+
 	const getCurrentAvatar = () => {
 		return avatars.find((a) => a.id === selectedAvatar) || avatars[0];
+	};
+
+	const cleanTextForSpeech = (text: string): string => {
+		let cleanedText = text.replace(/[#*"`_~[\]()]/g, '');
+
+		cleanedText = cleanedText.replace(/\s+/g, ' ').trim();
+
+		return cleanedText;
 	};
 
 	return (
@@ -193,28 +219,27 @@ const AIAssistant = () => {
 									<Select
 										value={selectedVoice}
 										onValueChange={setSelectedVoice}
+										disabled={!isSupported || voices.length === 0}
 									>
 										<SelectTrigger className="mt-2">
-											<SelectValue />
+											<SelectValue placeholder="Memuat suara..." />
 										</SelectTrigger>
 										<SelectContent>
 											{voices.map((voice) => (
 												<SelectItem
-													key={voice.id}
-													value={voice.id}
+													key={voice.name}
+													value={voice.name}
 												>
 													<div>
 														<div className="font-medium">
-															{voice.name}
-														</div>
-														<div className="text-xs text-muted-foreground">
-															{voice.description}
+															{voice.name} ({voice.lang})
 														</div>
 													</div>
 												</SelectItem>
 											))}
 										</SelectContent>
 									</Select>
+									{!isSupported && <p className="text-xs text-red-500 mt-1">Text-to-speech tidak didukung di browser ini.</p>}
 								</div>
 
 								<div className="flex items-center justify-center pt-4">
@@ -365,10 +390,8 @@ const AIAssistant = () => {
 														: "outline"
 												}
 												size="sm"
-												onClick={() =>
-													setIsSpeaking(!isSpeaking)
-												}
-												disabled={isLoading}
+												onClick={handlePlaybackToggle}
+												disabled={isLoading || !isSupported}
 											>
 												{isSpeaking ? (
 													<VolumeX className="h-4 w-4" />

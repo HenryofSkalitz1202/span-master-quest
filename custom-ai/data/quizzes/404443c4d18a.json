@@ -1,0 +1,136 @@
+{
+  "_id": "404443c4d18a",
+  "created_at": "2025-09-09T03:52:33Z",
+  "model": "gemini-2.5-pro",
+  "items": [
+    {
+      "pertanyaan": "Apa fungsi utama dari lapisan Automatic Speech Recognition (ASR) dalam alur kerja Fireflies.ai?",
+      "opsi": [
+        "A. Menganalisis sentimen positif atau negatif dalam percakapan.",
+        "B. Mengubah bahasa lisan dari audio menjadi teks tertulis.",
+        "C. Mengidentifikasi siapa yang berbicara pada waktu tertentu.",
+        "D. Menghasilkan ringkasan poin-poin penting dari rapat."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Berdasarkan bagian 2.2, ASR adalah lapisan fundamental yang bertanggung jawab untuk mengubah bahasa lisan menjadi teks. Fungsi lainnya dilakukan pada tahap selanjutnya.",
+      "id": "q1"
+    },
+    {
+      "pertanyaan": "Bagaimana cara paling umum bot Fireflies.ai mengetahui untuk bergabung dalam sebuah rapat virtual?",
+      "opsi": [
+        "A. Pengguna secara manual mengundang bot ke setiap rapat.",
+        "B. Bot menerima notifikasi email dan mengklik tautan.",
+        "C. Melalui integrasi kalender yang memindai undangan rapat.",
+        "D. Dengan mengaktifkan ekstensi browser saat rapat dimulai."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Bagian 2.1 menyatakan bahwa pemicu paling umum adalah integrasi kalender (Google atau Outlook) yang memindai undangan untuk mencari tautan rapat.",
+      "id": "q2"
+    },
+    {
+      "pertanyaan": "Proses yang dikenal sebagai 'diarisasi pembicara' bertujuan untuk...",
+      "opsi": [
+        "A. Menerjemahkan transkrip ke lebih dari 100 bahasa.",
+        "B. Menentukan siapa yang mengatakan apa dengan menganalisis karakteristik vokal.",
+        "C. Mengekstrak kata kunci dan topik utama dari percakapan.",
+        "D. Memberikan skor sentimen (-1 hingga +1) untuk setiap kalimat."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Menurut bagian 2.3, diarisasi pembicara adalah proses untuk membedakan antara pembicara yang berbeda dan menetapkan segmen teks ke individu yang benar.",
+      "id": "q3"
+    },
+    {
+      "pertanyaan": "Dalam tahap NLP & NLU, fitur apa yang bertanggung jawab untuk mengenali item seperti Tugas, Tanggal, dan Metrik?",
+      "opsi": [
+        "A. Analisis Sentimen",
+        "B. Pelacakan Topik",
+        "C. Pengenalan Entitas",
+        "D. Ringkasan AI"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Bagian 2.4 menjelaskan bahwa 'Pengenalan Entitas' adalah fitur di mana AI dilatih untuk mengenali dan menandai entitas spesifik seperti Item Tindakan, Tugas, Pertanyaan, Tanggal, dan Metrik.",
+      "id": "q4"
+    },
+    {
+      "pertanyaan": "Fitur 'AskFred' dalam Fireflies.ai dideskripsikan memiliki fungsi yang mirip dengan...",
+      "opsi": [
+        "A. Google Translate",
+        "B. Grammarly",
+        "C. DALL-E",
+        "D. ChatGPT"
+      ],
+      "jawaban": "D",
+      "penjelasan": "Bagian 2.5 secara eksplisit menyatakan bahwa 'AskFred' berfungsi seperti ChatGPT yang dikhususkan untuk data rapat, memungkinkan pengguna mengajukan pertanyaan dalam bahasa alami.",
+      "id": "q5"
+    },
+    {
+      "pertanyaan": "Selain bergabung dalam rapat secara real-time, bagaimana cara lain pengguna dapat memproses konten audio atau video menggunakan Fireflies.ai?",
+      "opsi": [
+        "A. Mengetik transkrip secara manual ke dalam platform.",
+        "B. Mengimpor catatan dari aplikasi lain seperti Notion.",
+        "C. Mengunggah file audio dan video yang sudah ada sebelumnya.",
+        "D. Merekam audio baru langsung melalui mikrofon di platform."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Pada bagian 2.1, disebutkan bahwa untuk konten yang tidak terjadi secara real-time, pengguna dapat mengunggah berbagai format file audio dan video (misalnya, MP3, MP4, WAV, M4A) langsung ke platform.",
+      "id": "q6"
+    },
+    {
+      "pertanyaan": "Teknologi apa yang secara spesifik disebutkan digunakan oleh Fireflies.ai untuk menghasilkan ringkasan rapat yang ringkas?",
+      "opsi": [
+        "A. Recurrent Neural Networks (RNNs)",
+        "B. Long Short-Term Memory (LSTM) networks",
+        "C. GPT-3 dan GPT-4",
+        "D. Algoritma 'voiceprint'"
+      ],
+      "jawaban": "C",
+      "penjelasan": "Bagian 2.5 tentang 'Ringkasan AI' secara eksplisit menyebutkan penggunaan teknologi yang didukung oleh GPT-3 dan GPT-4 untuk menghasilkan ringkasan rapat.",
+      "id": "q7"
+    },
+    {
+      "pertanyaan": "Apa istilah yang digunakan dalam teks untuk 'sidik suara' yang dibuat dari karakteristik vokal unik seperti nada, intonasi, dan irama?",
+      "opsi": [
+        "A. Voiceprint",
+        "B. Audio signature",
+        "C. Speaker profile",
+        "D. Vocal fingerprint"
+      ],
+      "jawaban": "A",
+      "penjelasan": "Bagian 2.3 menjelaskan bahwa teknologi diarisasi pembicara membuat 'sidik suara' (voiceprint) untuk setiap peserta guna membedakan mereka.",
+      "id": "q8"
+    },
+    {
+      "pertanyaan": "Menurut ringkasan, transformasi data dari audio mentah menjadi wawasan yang dapat ditindaklanjuti menunjukkan bahwa tujuan utama Fireflies.ai adalah...",
+      "opsi": [
+        "A. Hanya menyediakan transkrip yang 100% akurat.",
+        "B. Menggantikan semua platform konferensi video.",
+        "C. Membuat pengetahuan dalam transkrip tersedia secara instan dengan usaha minimal.",
+        "D. Menyimpan rekaman audio dan video dalam format file yang lebih kecil."
+      ],
+      "jawaban": "C",
+      "penjelasan": "Bagian 'Ringkasan' menyimpulkan bahwa tujuan utamanya bukan untuk memberikan transkrip yang sempurna, melainkan untuk membuat pengetahuan di dalam transkrip tersebut tersedia secara instan dengan usaha minimal.",
+      "id": "q9"
+    },
+    {
+      "pertanyaan": "Fireflies.ai mengklaim akurasi transkripsi hingga 95% dan mendukung lebih dari 100 bahasa. Hal ini menunjukkan fokus perusahaan pada...",
+      "opsi": [
+        "A. Kecepatan pemrosesan dan efisiensi server.",
+        "B. Kualitas transkripsi dan jangkauan global.",
+        "C. Integrasi khusus dengan perangkat keras audio.",
+        "D. Keamanan data dan enkripsi end-to-end."
+      ],
+      "jawaban": "B",
+      "penjelasan": "Bagian 2.2 menyoroti klaim akurasi hingga 95% dan dukungan untuk lebih dari 100 bahasa, yang secara langsung menunjukkan fokus pada kualitas transkripsi dan pasar global.",
+      "id": "q10"
+    }
+  ],
+  "meta": {
+    "source": "files",
+    "file_count": 1,
+    "difficulty": "mixed",
+    "n": 10,
+    "language": "id",
+    "include_explanation": true,
+    "topic_filter": null
+  }
+}
