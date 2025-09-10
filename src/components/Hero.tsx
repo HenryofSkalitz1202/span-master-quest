@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Brain, Target, Trophy } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
+import { useNav } from "@/context/NavContext";
 
 const Hero = () => {
+	const nav = useNav();
 	return (
 		<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
 			{/* Background with overlay */}
@@ -35,16 +37,10 @@ const Hero = () => {
 							variant="hero"
 							size="lg"
 							className="text-lg px-8 py-4"
+							onClick={() => nav.go("training")}
 						>
 							Start Training
 							<ArrowRight className="ml-2" />
-						</Button>
-						<Button
-							variant="outline"
-							size="lg"
-							className="text-lg px-8 py-4 bg-white/10 border-white/30 text-white hover:bg-white/20"
-						>
-							Learn More
 						</Button>
 					</div>
 
