@@ -552,7 +552,7 @@ const LearningMaterials = () => {
 
 	// ---------- RENDER ----------
 	return (
-		<div className="min-h-screen bg-background pt-20 p-6">
+		<div className="min-h-screen bg-background md:p-6 mt-44 md:mt-20">
 			<div className="container mx-auto max-w-4xl">
 				<div className="text-center mb-8">
 					<h1 className="text-4xl font-bold mb-2 bg-gradient-primary bg-clip-text text-transparent">

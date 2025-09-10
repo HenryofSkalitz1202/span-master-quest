@@ -71,7 +71,7 @@ export default function Dashboard() {
 	};
 
 	return (
-		<div className="min-h-screen bg-background p-6 mt-20">
+		<div className="min-h-screen bg-background md:p-6 mt-44 md:mt-20">
 			<div className="container mx-auto max-w-6xl">
 				{/* Header */}
 				<div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">

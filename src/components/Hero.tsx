@@ -6,7 +6,7 @@ import { useNav } from "@/context/NavContext";
 const Hero = () => {
 	const nav = useNav();
 	return (
-		<section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+		<section className="relative min-h-screen flex items-center justify-center overflow-hidden ">
 			{/* Background with overlay */}
 			<div className="absolute inset-0">
 				<img
@@ -18,7 +18,7 @@ const Hero = () => {
 			</div>
 
 			{/* Content */}
-			<div className="relative z-10 container mx-auto px-4 text-center text-white">
+			<div className="relative z-10 container mx-auto px-4 mb-20 text-center text-white md:p-6 mt-44 md:mt-20">
 				<div className="max-w-4xl mx-auto">
 					<h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
 						Focus. Unlock. Achieve.
