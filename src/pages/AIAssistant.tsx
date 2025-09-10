@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math"; // Impor plugin
+import rehypeKatex from "rehype-katex"; // Impor plugin
+
+import "katex/dist/katex.min.css"; // Impor stylesheet KaTeX
 import {
 	Select,
 	SelectContent,
@@ -522,9 +527,21 @@ const AIAssistant = () => {
 															: "bg-muted"
 													}`}
 												>
-													<p className="text-xs md:text-sm leading-relaxed break-words whitespace-pre-wrap">
-														{msg.message}
-													</p>
+													<div
+														className="prose prose-sm max-w-none text-xs md:text-sm leading-relaxed break-words 
+    [&_p]:my-2 [&_h3]:my-3 [&_h4]:my-3 [&_ul]:my-2 [&_ol]:my-2 [&_hr]:my-4"
+													>
+														<ReactMarkdown
+															remarkPlugins={[
+																remarkMath,
+															]}
+															rehypePlugins={[
+																rehypeKatex,
+															]}
+														>
+															{msg.message}
+														</ReactMarkdown>
+													</div>
 													<p className="text-[10px] md:text-xs opacity-70 mt-1">
 														{msg.timestamp.toLocaleTimeString(
 															"id-ID",
